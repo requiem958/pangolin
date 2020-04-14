@@ -26,6 +26,8 @@
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<defaultGoal>install</defaultGoal>
+		<directory>${basedir}/target</directory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
