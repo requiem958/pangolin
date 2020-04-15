@@ -3,11 +3,9 @@ package fr.triangle.pangolin.dataframe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Column<E> {
-	String label;
+public class Ligne<E> {
 	List<E> liste;
-	protected Column(String label) {
-		this.label = label;
+	protected Ligne(String label) {
 		liste = new ArrayList<>();
 	}
 	protected void add(E atribut) {
