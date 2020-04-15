@@ -27,7 +27,8 @@ public class Dataframe{
 	}
 
 	public Dataframe(String csvFile) {
-
+		this();
+		//ParseCsv.parse(this,csvFile);
 	}
 	
 	public View view() {
@@ -51,16 +52,20 @@ public class Dataframe{
 	
 	//Ajouter des colonnes au dataframe
 	protected boolean addColumn(Column c) {
-		return false;
+		if (columns.contains(c)) {
+			return false;
+		}
+		columns.add(c);
+		return true;
 	}
 	
 	//Ajouter des lignes au dataframe
 	protected boolean addLine(Object[] line) {
-		return false;
+		lines.add(line);
+		return true;
 	}
 	
 	private void createColumns(Object[][] data) {
-		
 		Column c;
 		List<String> labels = new ArrayList<>(tailleInitiale);
 		Object[] line;
@@ -82,14 +87,14 @@ public class Dataframe{
 				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
 				return;
 			}
-			columns.add(c);
+			addColumn(c);
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void fillData(Object[][] data) {
 		for (int i = 0; i < data.length; i++) {
-			lines.add(data[i]);
+			addLine(data[i]);
 			for (int j = 0; j < data[i].length; j++) {
 				columns.get(i).add(data[i][j]);
 			}
