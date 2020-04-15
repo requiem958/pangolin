@@ -9,7 +9,7 @@ public class Dataframe{
 	}
 	
 	public View view() {
-		return new DataView(this);
+		return new Dataview(this);
 	}
 	
 	public Dataframe fromLines(int lines[]) {

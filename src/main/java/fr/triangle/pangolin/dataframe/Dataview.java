@@ -2,9 +2,9 @@ package fr.triangle.pangolin.dataframe;
 
 import java.io.PrintStream;
 
-public class DataView implements View{
+public class Dataview implements View{
 
-	public DataView(Dataframe dataframe) {
+	public Dataview(Dataframe dataframe) {
 		// TODO Auto-generated constructor stub
 	}
 
