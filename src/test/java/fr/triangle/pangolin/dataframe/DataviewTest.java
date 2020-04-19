@@ -1,9 +1,12 @@
 package fr.triangle.pangolin.dataframe;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class DataviewTest extends TestCase {
+import org.junit.Test;
 
+public class DataviewTest{
+
+	@Test
 	public void testDataview() {
 		fail("Not yet implemented");
 	}

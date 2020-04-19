@@ -25,7 +25,7 @@ public class Dataframe{
 		fillData(data);
 	}
 
-	public Dataframe(String csvFile) {
+	public Dataframe(String csvFile){
 		this(ParseCsv.parse(csvFile));
 	}
 
@@ -92,16 +92,17 @@ public class Dataframe{
 		line = data[1];
 		for (int i = 0; i < line.length; i++) {
 			if (line[i] instanceof Double) {
-				c = new Column<Double>(labels.get(i));
+				c = Column.doubleColumn(labels.get(i));
 			}else if (line[i] instanceof Integer) {
-				c = new Column<Integer>(labels.get(i));
+				c = Column.integerColumn(labels.get(i));
 			}else if (line[i] instanceof String) {
-				c = new Column<String>(labels.get(i));
+				c = Column.stringColumn(labels.get(i));
 			}
 			else {
 				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
 				return;
 			}
+			System.out.println(line[i].getClass());
 			addColumn(c);
 		}
 	}
