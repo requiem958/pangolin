@@ -29,7 +29,12 @@ public class DataframeTest extends TestCase {
     }
 	
     public void testDataframeFromCSV() {
-    	fail("Not yet implemented");
+		d = new Dataframe("/annexe/testGoodCSV");
+		assertEquals(2, d.lines.size());
+		assertEquals(2, d.columns.size());
+		assertEquals(2, d.labelsToInt.keySet().size());
+		assertEquals("nom",d.columns.get(0).label);
+		assertEquals("age",d.columns.get(1).label);
     }
     
 	public void testDataframeFromGoodData() {

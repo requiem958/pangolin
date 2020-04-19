@@ -1,6 +1,7 @@
 package fr.triangle.pangolin.dataframe;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,9 +10,11 @@ public class ParseCsv {
 	static Scanner scannerLigne;
 	static Scanner scannerAttribue;
 	static List<String> listeLabel;
-	public static void parce(String csvFile, Dataframe data){
+
+	public static Object[][] parce(String csvFile){
 		
 		file = new File(csvFile);
+		ArrayList<String[]> liste = new ArrayList<String[]>();
 		
 		try {
 			scannerLigne = new Scanner(file);
@@ -20,44 +23,12 @@ public class ParseCsv {
 		}
 		
 		scannerLigne = scannerLigne.useDelimiter("\n");
-		
-		String ligne = scannerLigne.next();
-		String[] tab = ligne.split(";");
-		
-		for(int i = 0; i<tab.length; i++) {
-			listeLabel.add(tab[i]);
-		}
-		
-		ligne = scannerLigne.next();
-		tab = ligne.split(";");
-		
-		for(int i = 0; i<tab.length; i++) {
-			try {
-				Integer.valueOf(tab[i]);
-				Column<Integer> col = new Column<>(listeLabel.get(i));
-				data.addColumn(col);
-			} catch (Exception e) {
-				try {
-				Double.valueOf(tab[i]);
-				Column<Double> col = new Column<>(listeLabel.get(i));
-				data.addColumn(col);
-				} catch (Exception e2) {
-					Column<String> col = new Column<>(listeLabel.get(i));
-					data.addColumn(col);
-				}
-			}
-			
-		}
-		
+		String ligne = scannerLigne.next();		
+		liste.add(ligne.split(";"));
 		while(scannerLigne.hasNext()) {
 			ligne = scannerLigne.next();
-			tab = ligne.split(";");
-			for(int i = 0; i<tab.length; i++) {
-				
-				
-			}
-			
+			liste.add(ligne.split(";"));
 		}
-		
+		return (Object[][]) liste.toArray();
 	}
 }
