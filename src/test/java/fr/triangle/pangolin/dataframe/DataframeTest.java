@@ -44,6 +44,7 @@ public class DataframeTest extends TestCase {
 		assertEquals(2, d.labelsToInt.keySet().size());
 		assertEquals("nom",d.columns.get(0).label);
 		assertEquals("age",d.columns.get(1).label);
+		System.out.println(d.columns.get(0).getClass().getGenericSuperclass());
 	}
 
 	public void testView() {

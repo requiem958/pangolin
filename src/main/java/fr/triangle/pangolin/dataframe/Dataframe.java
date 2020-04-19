@@ -108,7 +108,7 @@ public class Dataframe{
 
 	@SuppressWarnings("unchecked")
 	private void fillData(Object[][] data) {
-		for (int i = 0; i < data.length; i++) {
+		for (int i = 1; i < data.length; i++) {
 			addLine(data[i]);
 			for (int j = 0; j < data[i].length; j++) {
 				if (data[i][j] instanceof Double) {

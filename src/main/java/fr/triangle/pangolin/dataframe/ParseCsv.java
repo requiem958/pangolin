@@ -14,7 +14,7 @@ public class ParseCsv {
 	public static Object[][] parse(String csvFile){
 		
 		file = new File(csvFile);
-		ArrayList<String[]> liste = new ArrayList<String[]>();
+		ArrayList<Object[]> liste = new ArrayList<>();
 		
 		try {
 			scannerLigne = new Scanner(file);
