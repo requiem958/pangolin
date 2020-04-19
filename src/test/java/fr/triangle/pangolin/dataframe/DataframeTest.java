@@ -1,10 +1,12 @@
 package fr.triangle.pangolin.dataframe;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
+import org.junit.Test.None;
 
 public class DataframeTest{
 
@@ -12,27 +14,31 @@ public class DataframeTest{
 	protected Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
 	protected Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
     
-    @Test
-    public void testDataframeLoadFromGoodCSV() {
-		d = new Dataframe("./annexes/testGoodCSV.csv");
-		assertNotNull(d);
+	private void goodDataAttributes() {
 		assertEquals(2, d.lines.size());
 		assertEquals(2, d.columns.size());
 		assertEquals(2, d.labelsToInt.keySet().size());
 		assertEquals("nom",d.columns.get(0).label);
 		assertEquals("age",d.columns.get(1).label);
+		assertEquals(String.class,d.columns.get(0).type);
+		assertEquals(Integer.class,d.columns.get(1).type);
+	}
+	
+    @Test(expected = None.class)
+    public void testDataframeLoadFromGoodCSV() throws FileNotFoundException {
+		d = new Dataframe("./annexes/testGoodCSV.csv");
+		goodDataAttributes();
+    }
+    
+    @Test(expected = FileNotFoundException.class)
+    public void testDataframeNoFile() throws FileNotFoundException{
+		d = new Dataframe("./annexes/nonExistent.csv");
     }
     
     @Test
 	public void testDataframeFromGoodData() {
 		d = new Dataframe(GoodData);
-		assertEquals(2, d.lines.size());
-		assertEquals(2, d.columns.size());
-		assertEquals(2, d.labelsToInt.keySet().size());
-		assertEquals("nom",d.columns.get(0).label);
-		assertEquals("age",d.columns.get(1).label);
-		assertEquals("string",d.columns.get(0).type);
-		assertEquals("int",d.columns.get(1).type);
+		goodDataAttributes();
 	}
 
     @Test

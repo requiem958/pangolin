@@ -1,5 +1,6 @@
 package fr.triangle.pangolin.dataframe;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Dataframe{
 		fillData(data);
 	}
 
-	public Dataframe(String csvFile){
+	public Dataframe(String csvFile) throws FileNotFoundException{
 		this(ParseCsv.parse(csvFile));
 	}
 
@@ -102,7 +103,6 @@ public class Dataframe{
 				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
 				return;
 			}
-			System.out.println(line[i].getClass());
 			addColumn(c);
 		}
 	}

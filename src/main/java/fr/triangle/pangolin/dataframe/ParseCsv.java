@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ParseCsv {
 
-	public static Object[][] parse(String csvFile){
+	public static Object[][] parse(String csvFile) throws FileNotFoundException{
 		List<String[]> liste = new ArrayList<>();
 		Object[][] tab;
 		File file = new File(csvFile);
@@ -28,7 +28,7 @@ public class ParseCsv {
 			}
 			return tab;
 		}catch(FileNotFoundException e) {
-			return null;
+			throw new FileNotFoundException();
 		}
 
 	}
