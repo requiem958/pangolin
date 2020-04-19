@@ -14,6 +14,8 @@ public class ParseCsv {
 
 	public static Object[][] parse(String csvFile){
 
+	public static Object[][] parse(String csvFile){
+
 		file = new File(csvFile);
 		Object[][] tab;
 
