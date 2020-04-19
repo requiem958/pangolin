@@ -29,7 +29,7 @@ public class DataframeTest extends TestCase {
     }
 	
     public void testDataframeFromCSV() {
-		d = new Dataframe("/annexe/testGoodCSV");
+		d = new Dataframe("./annexes/testGoodCSV.csv");
 		assertEquals(2, d.lines.size());
 		assertEquals(2, d.columns.size());
 		assertEquals(2, d.labelsToInt.keySet().size());
