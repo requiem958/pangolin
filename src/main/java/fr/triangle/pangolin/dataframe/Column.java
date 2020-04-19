@@ -11,7 +11,8 @@ public class Column<E> {
 		liste = new ArrayList<>();
 	}
 	protected void add(E atribut) {
-		liste.add(atribut);
+		liste.add(atribut); 
+		
 	}
 	
 }
