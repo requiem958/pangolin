@@ -7,10 +7,10 @@ import java.util.List;
 @SuppressWarnings("rawtypes")
 public class Dataframe{
 	 
-	private HashMap<String, Integer> labelsToInt;
+	protected HashMap<String, Integer> labelsToInt;
 	
-	private List<Column> columns;
-	private List<Object[]> lines;
+	protected List<Column> columns;
+	protected List<Object[]> lines;
 	
 	//Constructeur privé sans argument pour emptyDataframe
 	private Dataframe() {
@@ -85,13 +85,13 @@ public class Dataframe{
 		Column c;
 		List<String> labels = new ArrayList<>();
 		Object[] line;
-		for (int i = 0; i < data.length; i++) {
+		for (int i = 0; i < data[0].length; i++) {
 			labels.add((String)data[0][i]);
 			labelsToInt.put(labels.get(i), i);
 		}
 		
 		line = data[1];
-		for (int i = 0; i < data.length; i++) {
+		for (int i = 0; i < line.length; i++) {
 			if (line[i] instanceof Double) {
 				c = new Column<Double>(labels.get(i));
 			}else if (line[i] instanceof Integer) {
