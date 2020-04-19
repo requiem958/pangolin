@@ -11,7 +11,7 @@ public class ParseCsv {
 	static Scanner scannerAttribue;
 	static List<String> listeLabel;
 
-	public static Object[][] parce(String csvFile){
+	public static Object[][] parse(String csvFile){
 		
 		file = new File(csvFile);
 		ArrayList<String[]> liste = new ArrayList<String[]>();
@@ -20,6 +20,7 @@ public class ParseCsv {
 			scannerLigne = new Scanner(file);
 		} catch (Exception e) {
 			System.err.println("Fichier non existant");
+			return null;
 		}
 		
 		scannerLigne = scannerLigne.useDelimiter("\n");
