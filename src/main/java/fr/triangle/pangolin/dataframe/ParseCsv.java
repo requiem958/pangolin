@@ -12,6 +12,7 @@ public class ParseCsv {
 	static List<String> listeLabel;
 	static ArrayList<Object[]> liste = new ArrayList<>();
 
+
 	public static Object[][] parse(String csvFile){
 
 		file = new File(csvFile);
