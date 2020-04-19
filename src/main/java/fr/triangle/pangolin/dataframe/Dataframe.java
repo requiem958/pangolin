@@ -6,8 +6,7 @@ import java.util.List;
 
 @SuppressWarnings("rawtypes")
 public class Dataframe{
-	
-	private final int tailleInitiale = 10; 
+	 
 	private HashMap<String, Integer> labelsToInt;
 	
 	private List<Column> columns;
@@ -15,9 +14,9 @@ public class Dataframe{
 	
 	//Constructeur privé sans argument pour emptyDataframe
 	private Dataframe() {
-		labelsToInt = new HashMap<>(tailleInitiale);
-		columns = new ArrayList<>(tailleInitiale);
-		lines = new ArrayList<>(tailleInitiale);
+		labelsToInt = new HashMap<>();
+		columns = new ArrayList<>();
+		lines = new ArrayList<>();
 	}
 	
 	public Dataframe(Object data[][]) {
@@ -36,11 +35,27 @@ public class Dataframe{
 	}
 	
 	public Dataframe fromLines(int lines[]) {
-		return null;
+		Dataframe d = new Dataframe();
+		for (int i : lines) {
+			if (i < this.lines.size()) {
+				d.addLine(this.lines.get(i));
+			}
+		}
+		d.columns = new ArrayList<>(columns);
+		return d;
 	}
 	
 	public Dataframe fromColumns(String labels[]) {
-		return null;
+		Dataframe d = new Dataframe();
+		List<String> list_labels = List.of(labels);
+		for (Column c : columns) {
+			if (list_labels.contains(c.label)) {
+				d.addColumn(c);
+			}
+		}
+		
+		d.lines = new ArrayList<>(this.lines);
+		return d;
 	}
 	
 	//Utilisable par le parseur CSV pour initialiser le dataframe
@@ -65,9 +80,10 @@ public class Dataframe{
 		return true;
 	}
 	
+	
 	private void createColumns(Object[][] data) {
 		Column c;
-		List<String> labels = new ArrayList<>(tailleInitiale);
+		List<String> labels = new ArrayList<>();
 		Object[] line;
 		for (int i = 0; i < data.length; i++) {
 			labels.add((String)data[0][i]);
@@ -96,7 +112,18 @@ public class Dataframe{
 		for (int i = 0; i < data.length; i++) {
 			addLine(data[i]);
 			for (int j = 0; j < data[i].length; j++) {
-				columns.get(i).add(data[i][j]);
+				if (data[i][j] instanceof Double) {
+					columns.get(i).add((Double)data[i][j]);
+				}else if (data[i][j] instanceof Integer) {
+					columns.get(i).add((Integer)data[i][j]);
+				}else if (data[i][j] instanceof String) {
+					columns.get(i).add((String)data[i][j]);
+				}
+				else {
+					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
+					return;
+				}
+				
 			}
 		}
 	}

@@ -8,10 +8,6 @@ public class DataframeTest extends TestCase {
 		fail("Not yet implemented");
 	}
 
-	public void testDataframeString() {
-		fail("Not yet implemented");
-	}
-
 	public void testView() {
 		fail("Not yet implemented");
 	}
