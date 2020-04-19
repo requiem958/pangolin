@@ -26,8 +26,7 @@ public class Dataframe{
 	}
 
 	public Dataframe(String csvFile) {
-		this();
-		//ParseCsv.parse(this,csvFile);
+		this(ParseCsv.parce(csvFile));
 	}
 
 	public View view() {
