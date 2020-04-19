@@ -112,11 +112,11 @@ public class Dataframe{
 			addLine(data[i]);
 			for (int j = 0; j < data[i].length; j++) {
 				if (data[i][j] instanceof Double) {
-					columns.get(i).add((Double)data[i][j]);
+					columns.get(j).add((Double)data[i][j]);
 				}else if (data[i][j] instanceof Integer) {
-					columns.get(i).add((Integer)data[i][j]);
+					columns.get(j).add((Integer)data[i][j]);
 				}else if (data[i][j] instanceof String) {
-					columns.get(i).add((String)data[i][j]);
+					columns.get(j).add((String)data[i][j]);
 				}
 				else {
 					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
