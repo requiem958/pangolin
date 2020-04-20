@@ -4,8 +4,9 @@ import java.io.PrintStream;
 
 public class Dataview implements View{
 
+	Dataframe d;
 	public Dataview(Dataframe dataframe) {
-		// TODO Auto-generated constructor stub
+		d = dataframe;
 	}
 
 	@Override
@@ -40,8 +41,7 @@ public class Dataview implements View{
 
 	@Override
 	public Dataframe getData() {
-		// TODO Auto-generated method stub
-		return null;
+		return d;
 	}
 
 }

@@ -26,7 +26,7 @@ public class Column<E> {
 		if (this == obj)
 			return true;
 		
-		if (!(obj instanceof Column<?>))
+		if (!(obj instanceof Column))
 			return false;
 		
 		Column<?> that = (Column<?>) obj;
@@ -37,10 +37,10 @@ public class Column<E> {
 		if (this.label != that.label)
 			return false;
 		
-		if (this.liste != that.liste)
-			return false;
+		if (this.liste.equals(that.liste))
+			return true;
 		
-		return true;
+		return false;
 	}
 	
 	public static Column<Integer> integerColumn(String label){
