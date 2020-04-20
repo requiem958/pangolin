@@ -11,8 +11,8 @@ import org.junit.Test.None;
 public class DataframeTest{
 
 	protected Dataframe d;
-	protected Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
-	protected Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
+	protected static Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
+	protected static Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
     
 	private void goodDataAttributes() {
 		assertEquals(2, d.lines.size());

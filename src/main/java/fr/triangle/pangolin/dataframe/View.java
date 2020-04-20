@@ -8,4 +8,5 @@ public interface View {
 	public void printFirst(PrintStream ps, int n);
 	public void printLast(PrintStream ps);
 	public void printLast(PrintStream ps, int n);
+	public Dataframe getData();
 }

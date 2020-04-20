@@ -38,4 +38,10 @@ public class Dataview implements View{
 		
 	}
 
+	@Override
+	public Dataframe getData() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

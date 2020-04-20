@@ -3,6 +3,7 @@ package fr.triangle.pangolin.dataframe;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 @SuppressWarnings("rawtypes")
@@ -41,7 +42,7 @@ public class Dataframe{
 				d.addLine(this.lines.get(i));
 			}
 		}
-		d.columns = new ArrayList<>(columns);
+		d.columns.addAll(columns);
 		d.labelsToInt.putAll(labelsToInt);
 		return d;
 	}
@@ -56,11 +57,32 @@ public class Dataframe{
 				d.labelsToInt.put(c.label, i++);
 			}
 		}
-
-		d.lines = new ArrayList<>(this.lines);
+		d.lines.addAll(this.lines);
 		
 		return d;
 	}
+	
+	@Override
+    public boolean equals(Object obj) 
+    { 
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Dataframe))
+			return false;
+		
+		//On sait que obj est un autre dataframe
+		//On checke les données
+		Dataframe that = (Dataframe) obj;
+		
+		
+		if (lines != that.lines)
+			return false;
+		
+		if (new HashSet<Column>(columns) != new HashSet<Column>(that.columns))
+			return false;
+		
+		return true;
+    }
 
 	//Utilisable par le parseur CSV pour initialiser le dataframe
 

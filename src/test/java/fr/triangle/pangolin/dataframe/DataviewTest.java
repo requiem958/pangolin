@@ -6,9 +6,16 @@ import org.junit.Test;
 
 public class DataviewTest{
 
+	Dataframe d;
+	View v;
+	public void setUp() {
+		d = new Dataframe(DataframeTest.GoodData);
+	}
 	@Test
 	public void testDataview() {
-		fail("Not yet implemented");
+		v = new Dataview(d);
+		assertNotNull(v);
+		assertEquals(d, v.getData());
 	}
 
 	public void testPrintAll() {

@@ -21,6 +21,28 @@ public class Column<E> {
 		}
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		if (!(obj instanceof Column<?>))
+			return false;
+		
+		Column<?> that = (Column<?>) obj;
+		
+		if (this.type != that.type)
+			return false;
+		
+		if (this.label != that.label)
+			return false;
+		
+		if (this.liste != that.liste)
+			return false;
+		
+		return true;
+	}
+	
 	public static Column<Integer> integerColumn(String label){
 		return new Column<Integer>(label, Integer.class);
 	}
