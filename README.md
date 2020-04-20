@@ -6,6 +6,8 @@
 
 [![codebeat badge](https://codebeat.co/badges/9be933f7-a732-4e9f-85d7-5539293a373d)](https://codebeat.co/projects/github-com-requiem958-pangolin-master)
 
+[![CodeFactor](https://www.codefactor.io/repository/github/requiem958/pangolin/badge)](https://www.codefactor.io/repository/github/requiem958/pangolin)
+
 ## Fonctionnalités implémentées
 
 ## Déploiement docker
