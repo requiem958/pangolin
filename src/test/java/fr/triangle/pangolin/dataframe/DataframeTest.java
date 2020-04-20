@@ -1,7 +1,7 @@
 package fr.triangle.pangolin.dataframe;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.FileNotFoundException;
 
@@ -43,16 +43,35 @@ public class DataframeTest{
 
     @Test
 	public void testView() {
-		fail("Not yet implemented");
+		d = new Dataframe(GoodData);
+		assertNotNull(d.view());
 	}
 
     @Test
 	public void testFromLines() {
-		fail("Not yet implemented");
+		d = new Dataframe(GoodData);
+		int[] lines = {0};
+		Dataframe d2 = d.fromLines(lines);
+		assertNotNull(d2);
+		assertEquals(1, d2.lines.size());
+		assertEquals(2, d2.columns.size());
+		assertEquals(2, d2.labelsToInt.keySet().size());
+		assertEquals("nom",d2.columns.get(0).label);
+		assertEquals("age",d2.columns.get(1).label);
+		assertEquals(String.class,d2.columns.get(0).type);
+		assertEquals(Integer.class,d2.columns.get(1).type);
 	}
     @Test
 	public void testFromColumns() {
-		fail("Not yet implemented");
+    	d = new Dataframe(GoodData);
+		String[] columns = {"nom"};
+		Dataframe d2 = d.fromColumns(columns);
+		assertNotNull(d2);
+		assertEquals(2, d2.lines.size());
+		assertEquals(1, d2.columns.size());
+		assertEquals(1, d2.labelsToInt.keySet().size());
+		assertEquals("nom",d2.columns.get(0).label);
+		assertEquals(String.class,d2.columns.get(0).type);
 	}
 
 }

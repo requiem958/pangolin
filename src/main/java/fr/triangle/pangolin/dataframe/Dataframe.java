@@ -42,19 +42,23 @@ public class Dataframe{
 			}
 		}
 		d.columns = new ArrayList<>(columns);
+		d.labelsToInt.putAll(labelsToInt);
 		return d;
 	}
 
 	public Dataframe fromColumns(String labels[]) {
 		Dataframe d = new Dataframe();
 		List<String> list_labels = List.of(labels);
+		int i = 0;
 		for (Column c : columns) {
 			if (list_labels.contains(c.label)) {
 				d.addColumn(c);
+				d.labelsToInt.put(c.label, i++);
 			}
 		}
 
 		d.lines = new ArrayList<>(this.lines);
+		
 		return d;
 	}
 
