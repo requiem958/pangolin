@@ -23,8 +23,10 @@ public class Dataframe{
 
 	public Dataframe(Object data[][]) {
 		this();
-		createColumns(data);
-		fillData(data);
+		if(data != null) {
+			createColumns(data);
+			fillData(data);
+		}
 	}
 
 	public Dataframe(String csvFile) throws FileNotFoundException{

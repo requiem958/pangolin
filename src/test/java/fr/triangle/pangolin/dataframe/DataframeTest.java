@@ -47,9 +47,6 @@ public class DataframeTest{
     @Test(expected = FileNotFoundException.class)
     public void testDataframeNoFile() throws FileNotFoundException{
 		d = new Dataframe("./annexes/nonExistent.csv");
-		assertEquals(2, d.lines.size());
-		assertEquals(2, d.columns.size());
-		assertEquals(2, d.labelsToInt.keySet().size());
     }
     @Test
     public void testDataframeEmptyFile() throws FileNotFoundException{
@@ -64,13 +61,13 @@ public class DataframeTest{
 		d = new Dataframe(GoodData);
 		goodDataAttributes();
 	}
-    /*
+    
     @Test
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
 		goodDataAttributes();
 	}
-	*/
+	
     @Test
 	public void testDataframeFromGoodDataDouble() {
 		d = new Dataframe(GoodDataDouble);
