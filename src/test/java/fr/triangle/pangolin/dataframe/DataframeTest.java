@@ -65,7 +65,9 @@ public class DataframeTest{
     @Test
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
-		goodDataAttributes();
+		assertEquals(0, d.lines.size());
+		assertEquals(0, d.columns.size());
+		assertEquals(0, d.labelsToInt.keySet().size());
 	}
 	
     @Test
