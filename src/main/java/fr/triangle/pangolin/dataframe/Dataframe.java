@@ -83,7 +83,7 @@ public class Dataframe{
 		if (!lines.equals(that.lines))
 			return false;
 		
-		if (new HashSet<Column>(columns) != new HashSet<Column>(that.columns))
+		if (!new HashSet<Column>(columns).equals(new HashSet<Column>(that.columns)))
 			return false;
 		
 		return true;

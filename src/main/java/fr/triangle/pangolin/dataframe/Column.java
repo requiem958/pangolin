@@ -43,6 +43,11 @@ public class Column<E> {
 		return false;
 	}
 	
+    @Override
+    public int hashCode() {
+        return label.hashCode();
+    }
+	
 	public static Column<Integer> integerColumn(String label){
 		return new Column<Integer>(label, Integer.class);
 	}
