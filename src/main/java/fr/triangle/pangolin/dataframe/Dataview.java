@@ -17,7 +17,7 @@ public class Dataview implements View{
 		ps.println("\n-------------------------");
 		for(int i = 0; i<d.lines.size(); i++) {
 			for(int k = 0; k<d.lines.get(0).length; k++) {
-				ps.print(d.lines.get(i)[k] + "\t|\t");
+				ps.print(d.lines.get(i).get(k) + "\t|\t");
 			}
 			ps.println();
 		}

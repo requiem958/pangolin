@@ -2,9 +2,11 @@ package fr.triangle.pangolin.dataframe;
 
 public class Line{
 	protected Object[] line;
+	public int length;
 	
 	public Line(Object[] line2) {
 		line = new Object[line2.length];
+		length = line2.length;
 		int i = 0;
 		for(Object o : line2) {
 			line[i] = o;
@@ -44,4 +46,5 @@ public class Line{
 	public Object get(int index) {
 		return line[index];
 	}
+
 }
