@@ -88,6 +88,15 @@ public class Dataframe{
 		
 		return true;
     }
+	
+	@Override
+	public int hashCode() {
+		int hashCode = 17;
+		for (Column c : columns) {
+			hashCode ^= c.hashCode();
+		}
+		return hashCode;
+	}
 
 	//Utilisable par le parseur CSV pour initialiser le dataframe
 
