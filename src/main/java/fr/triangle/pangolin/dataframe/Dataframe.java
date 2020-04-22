@@ -140,6 +140,7 @@ public class Dataframe{
 
 	@SuppressWarnings("unchecked")
 	private void fillData(Object[][] data) {
+		try {
 		for (int i = 1; i < data.length; i++) {
 			addLine(data[i]);
 			for (int j = 0; j < data[i].length; j++) {
@@ -156,6 +157,11 @@ public class Dataframe{
 				}
 
 			}
+		}
+		} catch(ClassCastException e) {
+			labelsToInt.clear();
+			columns.clear();
+			lines.clear();
 		}
 	}
 }
