@@ -29,6 +29,13 @@ public class ColumnTest {
 	}
 	
 	@Test
+	public void testGoodAddString() {
+		Column<String> c = Column.stringColumn("col");
+		c.add("test");
+		assertEquals(1, c.liste.size());
+	}
+	
+	@Test
 	public void testEqual() {
 		Column<Integer> c = Column.integerColumn("col");
 		Column<Integer> c2 = Column.integerColumn("col");

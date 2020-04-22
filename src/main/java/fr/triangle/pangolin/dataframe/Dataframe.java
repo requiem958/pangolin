@@ -61,7 +61,7 @@ public class Dataframe{
 		
 		return d;
 	}
-	
+	//tu passes jamais dans ca.
 	@Override
     public boolean equals(Object obj) 
     { 
@@ -75,7 +75,7 @@ public class Dataframe{
 		Dataframe that = (Dataframe) obj;
 		
 		
-		if (lines != that.lines)
+		if (!lines.equals(that.lines))
 			return false;
 		
 		if (new HashSet<Column>(columns) != new HashSet<Column>(that.columns))
