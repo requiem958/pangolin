@@ -10,8 +10,28 @@
 
 ## Fonctionnalités implémentées
 
-## Déploiement docker
+Actuellement il est possible de :
+
+1. Créer des dataframes à partir de tableaux d'objets de : *integer, double, string*
+2. Créer des dataframes à partir de fichiers CSV
+3. Récupérer un dataframe par ses colonnes
+4. Récupérer un dataframe par ses lignes
+5. Afficher entièrement un dataframe
 
 ## Outils utilisés
+
+Nous utilisons pour les tests unitaires : **JUNIT 4.11** car cette version ajoute la méthode *assertNotEquals* très utile.
+
+Le projet est déployé via maven, qui génére les rapports de test, non envoyés sur le github.
+
+Le déploiement se fait via travis-ci qui exécute tout les tests.
+
+Nous avons aussi trois outils pour assurer la qualité du code :
+
+* Codecov : Gestion de la couverture de code.
+* Codebeat : Gestion de la qualité du code grâce à leur métrique.
+* Codefactor : Gestion de la qualité du code, pour corriger les oublis dans le code et utiliser les bonnes pratiques. 
+
+## Déploiement docker
 
 ## Feedback
