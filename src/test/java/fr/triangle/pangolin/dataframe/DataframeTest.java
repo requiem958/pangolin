@@ -13,6 +13,7 @@ public class DataframeTest{
 
 	protected Dataframe d;
 	protected static Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
+	protected static Object[][] GoodDataBis = { {"nom","nbEnfants"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
 	protected static Object[][] GoodDataDouble = { {"nom","age"}, {"Robert", (Double) 10.1}, {"Marc", (Double) 11.1} };
 	protected static Object[][] DataWithSameNameColumn = { {"nom","age","age"}, {"Robert", (Integer) 10,(Integer) 10}, {"Marc", (Integer) 11,(Integer) 10} };
 	protected static Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
@@ -65,7 +66,9 @@ public class DataframeTest{
     @Test
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
-		goodDataAttributes();
+		assertEquals(0, d.lines.size());
+		assertEquals(0, d.columns.size());
+		assertEquals(0, d.labelsToInt.keySet().size());
 	}
 	
     @Test
@@ -139,9 +142,11 @@ public class DataframeTest{
     	d = new Dataframe(GoodData);
     	Dataframe d2 = new Dataframe(GoodData);
     	Dataframe d3 = new Dataframe(GoodDataDouble);
+    	Dataframe d4 = new Dataframe(GoodDataBis);
     	assertEquals(d, d);
     	assertNotEquals(d, null);
     	assertNotEquals(d, d3);
+    	assertNotEquals(d, d4);
     	assertEquals(d, d2);
 	}
     
