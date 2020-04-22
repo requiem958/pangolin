@@ -23,7 +23,7 @@ public class ParseCsv {
 				tab = new Object[liste.size()][liste.get(0).length];
 			}
 			else {
-				tab = new Object[0][0];
+				tab = new Object[1][1];
 				return tab;
 			}
 			for (int i = 0; i < liste.size(); i++) {
