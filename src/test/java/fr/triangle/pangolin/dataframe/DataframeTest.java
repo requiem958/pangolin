@@ -32,11 +32,31 @@ public class DataframeTest{
 		d = new Dataframe("./annexes/testGoodCSV.csv");
 		goodDataAttributes();
     }
+    @Test(expected = None.class)
+    public void testDataframeLoadFromGoodDoubleCSV() throws FileNotFoundException {
+		d = new Dataframe("./annexes/testGoodDoubleCSV.csv");
+		assertEquals(2, d.lines.size());
+		assertEquals(2, d.columns.size());
+		assertEquals(2, d.labelsToInt.keySet().size());
+		assertEquals("nom",d.columns.get(0).label);
+		assertEquals("age",d.columns.get(1).label);
+		assertEquals(String.class,d.columns.get(0).type);
+		assertEquals(Double.class,d.columns.get(1).type);
+    }
     
     @Test(expected = FileNotFoundException.class)
     public void testDataframeNoFile() throws FileNotFoundException{
 		d = new Dataframe("./annexes/nonExistent.csv");
-		goodDataAttributes();
+		assertEquals(2, d.lines.size());
+		assertEquals(2, d.columns.size());
+		assertEquals(2, d.labelsToInt.keySet().size());
+    }
+    @Test
+    public void testDataframeEmptyFile() throws FileNotFoundException{
+		d = new Dataframe("./annexes/empty.csv");
+		assertEquals(0, d.lines.size());
+		assertEquals(0, d.columns.size());
+		assertEquals(0, d.labelsToInt.keySet().size());
     }
     
     @Test
@@ -123,6 +143,7 @@ public class DataframeTest{
     	Dataframe d2 = new Dataframe(GoodData);
     	Dataframe d3 = new Dataframe(GoodDataDouble);
     	assertEquals(d, d);
+    	assertNotEquals(d, null);
     	assertNotEquals(d, d3);
     	assertEquals(d, d2);
 	}
