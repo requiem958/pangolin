@@ -14,13 +14,18 @@ public class ParseCsv {
 		File file = new File(csvFile);
 		try (Scanner scannerLigne = new Scanner(file)){
 			scannerLigne.useDelimiter("\n");
-			String ligne;
+			String ligne = "";
 			while(scannerLigne.hasNext()) {
 				ligne = scannerLigne.next();
 				liste.add(ligne.split(";"));
 			}
-			tab = new Object[liste.size()][liste.get(0).length];
-	
+			if(!ligne.isEmpty()) {
+				tab = new Object[liste.size()][liste.get(0).length];
+			}
+			else {
+				tab = new Object[0][0];
+				return tab;
+			}
 			for (int i = 0; i < liste.size(); i++) {
 				for(int j = 0; j < liste.get(0).length; j++) {
 					tab[i][j] = checkType(liste.get(i)[j]);
