@@ -142,12 +142,14 @@ public class DataframeTest{
     	d = new Dataframe(GoodData);
     	Dataframe d2 = new Dataframe(GoodData);
     	Dataframe d3 = new Dataframe(GoodDataDouble);
-    	Dataframe d4 = new Dataframe(GoodDataBis);
+    	GoodData[0][0] = "NOM";
+    	Dataframe d4 = new Dataframe(GoodData);
     	assertEquals(d, d);
     	assertNotEquals(d, null);
     	assertNotEquals(d, d3);
     	assertNotEquals(d, d4);
     	assertEquals(d, d2);
+    	GoodData[0][0] = "nom";
 	}
     
 }

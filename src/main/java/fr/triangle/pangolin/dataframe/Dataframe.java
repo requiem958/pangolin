@@ -12,7 +12,7 @@ public class Dataframe{
 	protected HashMap<String, Integer> labelsToInt;
 
 	protected List<Column> columns;
-	protected List<Object[]> lines;
+	protected List<Line> lines;
 
 	//Constructeur privé sans argument pour emptyDataframe
 	private Dataframe() {
@@ -116,6 +116,11 @@ public class Dataframe{
 
 	//Ajouter des lignes au dataframe
 	protected boolean addLine(Object[] line) {
+		lines.add(new Line(line));
+		return true;
+	}
+	
+	protected boolean addLine(Line line) {
 		lines.add(line);
 		return true;
 	}
