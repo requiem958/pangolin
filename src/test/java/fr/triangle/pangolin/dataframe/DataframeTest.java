@@ -17,6 +17,8 @@ public class DataframeTest{
 	protected static Object[][] GoodDataDouble = { {"nom","age"}, {"Robert", (Double) 10.1}, {"Marc", (Double) 11.1} };
 	protected static Object[][] DataWithSameNameColumn = { {"nom","age","age"}, {"Robert", (Integer) 10,(Integer) 10}, {"Marc", (Integer) 11,(Integer) 10} };
 	protected static Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
+	protected static Object[][] BadTypeDataCheckOk = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Boolean) true} };
+	protected static Object[][] BadTypeDataCheckNotOk = { {"nom","age"}, {"Robert", (Boolean) true}, {"Marc", (Boolean) true} };
     
 	private void goodDataAttributes() {
 		assertEquals(2, d.lines.size());
@@ -66,6 +68,22 @@ public class DataframeTest{
     @Test
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
+		assertEquals(0, d.lines.size());
+		assertEquals(0, d.columns.size());
+		assertEquals(0, d.labelsToInt.keySet().size());
+	}
+    
+    @Test
+	public void testDataframeFromBadTypeDataCheckOk() {
+		d = new Dataframe(BadTypeDataCheckOk);
+		assertEquals(0, d.lines.size());
+		assertEquals(0, d.columns.size());
+		assertEquals(0, d.labelsToInt.keySet().size());
+	}
+    
+    @Test
+	public void testDataframeFromBadTypeDataCheckNotOk() {
+		d = new Dataframe(BadTypeDataCheckNotOk);
 		assertEquals(0, d.lines.size());
 		assertEquals(0, d.columns.size());
 		assertEquals(0, d.labelsToInt.keySet().size());

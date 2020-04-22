@@ -24,8 +24,8 @@ public class Dataframe{
 	public Dataframe(Object data[][]) {
 		this();
 		if(data != null) {
-			createColumns(data);
-			fillData(data);
+			if (createColumns(data))
+				fillData(data);	
 		}
 	}
 
@@ -95,13 +95,6 @@ public class Dataframe{
 		return hashCode;
 	}
 
-	//Utilisable par le parseur CSV pour initialiser le dataframe
-
-	//Créer un dataframe vide
-	protected static Dataframe emptyDataframe() {
-		return new Dataframe();
-	}
-
 	//Ajouter des colonnes au dataframe
 	protected boolean addColumn(Column c) {
 		if (columns.contains(c)) {
@@ -123,7 +116,7 @@ public class Dataframe{
 	}
 
 
-	private void createColumns(Object[][] data) {
+	private boolean createColumns(Object[][] data) {
 		Column c;
 		List<String> labels = new ArrayList<>();
 		Object[] line;
@@ -143,14 +136,16 @@ public class Dataframe{
 			}
 			else {
 				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
-				return;
+				clear();
+				return false;
 			}
 			addColumn(c);
 		}
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void fillData(Object[][] data) {
+	private boolean fillData(Object[][] data) {
 		try {
 		for (int i = 1; i < data.length; i++) {
 			addLine(data[i]);
@@ -164,15 +159,21 @@ public class Dataframe{
 				}
 				else {
 					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
-					return;
+					clear();
+					return false;
 				}
 
 			}
 		}
 		} catch(ClassCastException e) {
-			labelsToInt.clear();
-			columns.clear();
-			lines.clear();
+			clear();
 		}
+		return true;
+	}
+	
+	private void clear() {
+		labelsToInt.clear();
+		columns.clear();
+		lines.clear();
 	}
 }
