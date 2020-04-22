@@ -11,7 +11,16 @@ public class Dataview implements View{
 
 	@Override
 	public void printAll(PrintStream ps) {
-		// TODO Auto-generated method stub
+		for(int j = 0; j<d.columns.size(); j++) {
+			ps.print(d.columns.get(j).label + "\t|\t");
+		}
+		ps.println("\n-------------------------");
+		for(int i = 0; i<d.lines.size(); i++) {
+			for(int k = 0; k<d.lines.get(0).length; k++) {
+				ps.print(d.lines.get(i)[k] + "\t|\t");
+			}
+			ps.println();
+		}
 		
 	}
 

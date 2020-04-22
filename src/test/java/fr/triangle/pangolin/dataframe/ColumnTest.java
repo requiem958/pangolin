@@ -43,6 +43,8 @@ public class ColumnTest {
 		c2.add(10);
 		
 		assertEquals(c, c2);
+		assertEquals(c, c);
+		assertNotEquals(c, null);
 	}
 	
 	@Test
