@@ -88,21 +88,9 @@ public class Dataframe{
 		
 		return true;
     }
-	
-	@Override
-	public int hashCode() {
-		int hashCode = 17;
-		for (Column c : columns) {
-			hashCode ^= c.hashCode();
-		}
-		return hashCode;
-	}
 
 	//Ajouter des colonnes au dataframe
 	protected boolean addColumn(Column c) {
-		if (columns.contains(c)) {
-			return false;
-		}
 		columns.add(c);
 		return true;
 	}
