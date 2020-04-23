@@ -26,8 +26,8 @@ public class DataframeTest{
 		assertEquals(2, d.labelsToInt.keySet().size());
 		assertEquals("nom",d.getColumns().get(0).label);
 		assertEquals("age",d.getColumns().get(1).label);
-		assertEquals(String.class,d.getColumns().get(0).type);
-		assertEquals(Integer.class,d.getColumns().get(1).type);
+		assertEquals(String.class,d.getColumns().get(0).getType());
+		assertEquals(Integer.class,d.getColumns().get(1).getType());
 	}
 	
     @Test(expected = None.class)
@@ -43,8 +43,8 @@ public class DataframeTest{
 		assertEquals(2, d.labelsToInt.keySet().size());
 		assertEquals("nom",d.getColumns().get(0).label);
 		assertEquals("age",d.getColumns().get(1).label);
-		assertEquals(String.class,d.getColumns().get(0).type);
-		assertEquals(Double.class,d.getColumns().get(1).type);
+		assertEquals(String.class,d.getColumns().get(0).getType());
+		assertEquals(Double.class,d.getColumns().get(1).getType());
     }
     
     @Test(expected = FileNotFoundException.class)
@@ -97,8 +97,8 @@ public class DataframeTest{
 		assertEquals(2, d.labelsToInt.keySet().size());
 		assertEquals("nom",d.getColumns().get(0).label);
 		assertEquals("age",d.getColumns().get(1).label);
-		assertEquals(String.class,d.getColumns().get(0).type);
-		assertEquals(Double.class,d.getColumns().get(1).type);
+		assertEquals(String.class,d.getColumns().get(0).getType());
+		assertEquals(Double.class,d.getColumns().get(1).getType());
 	}
     /*
     @Test
@@ -124,8 +124,8 @@ public class DataframeTest{
 		assertEquals(2, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
 		assertEquals("age",d2.getColumns().get(1).label);
-		assertEquals(String.class,d2.getColumns().get(0).type);
-		assertEquals(Integer.class,d2.getColumns().get(1).type);
+		assertEquals(String.class,d2.getColumns().get(0).getType());
+		assertEquals(Integer.class,d2.getColumns().get(1).getType());
 		
 	}
     @Test
@@ -139,8 +139,8 @@ public class DataframeTest{
 		assertEquals(2, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
 		assertEquals("age",d2.getColumns().get(1).label);
-		assertEquals(String.class,d2.getColumns().get(0).type);
-		assertEquals(Integer.class,d2.getColumns().get(1).type);
+		assertEquals(String.class,d2.getColumns().get(0).getType());
+		assertEquals(Integer.class,d2.getColumns().get(1).getType());
 		
 	}
     @Test
@@ -153,7 +153,7 @@ public class DataframeTest{
 		assertEquals(1, d2.getColumns().size());
 		assertEquals(1, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
-		assertEquals(String.class,d2.getColumns().get(0).type);
+		assertEquals(String.class,d2.getColumns().get(0).getType());
 	}
     @Test
 	public void testDataFrameEquals() {

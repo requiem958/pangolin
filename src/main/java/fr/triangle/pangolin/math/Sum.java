@@ -1,4 +1,6 @@
-package fr.triangle.pangolin.dataframe;
+package fr.triangle.pangolin.math;
+
+import fr.triangle.pangolin.dataframe.Column;
 
 public class Sum extends MathColumnOperation {
 

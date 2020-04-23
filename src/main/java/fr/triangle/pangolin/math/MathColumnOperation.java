@@ -1,10 +1,12 @@
-package fr.triangle.pangolin.dataframe;
+package fr.triangle.pangolin.math;
+
+import fr.triangle.pangolin.dataframe.Column;
 
 public abstract class MathColumnOperation {
 
 	public Number op(Column<? extends Number> c) throws ArithmeticException{
 		Number var = 0;
-		for (Number n : c.liste) {
+		for (Number n : c.getListe()) {
 			var = doOp(var,n);
 			if(var == null)
 				throwArithExc();
@@ -27,9 +29,9 @@ public abstract class MathColumnOperation {
 
 	@SuppressWarnings("unchecked")
 	protected Number doEndOp(Number var, Column<? extends Number> c) throws ArithmeticException {
-		if (c.type.equals(Integer.class))
+		if (c.getType().equals(Integer.class))
 			return endOpOnInteger(var.intValue(),(Column<Integer>)c);
-		else if (c.type.equals(Double.class))
+		else if (c.getType().equals(Double.class))
 			return endOpOnDouble(var.doubleValue(),(Column<Double>)c);
 		//on a une string
 		return null;

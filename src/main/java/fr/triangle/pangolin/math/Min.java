@@ -1,4 +1,4 @@
-package fr.triangle.pangolin.dataframe;
+package fr.triangle.pangolin.math;
 
 public class Min extends Max {
 	@Override

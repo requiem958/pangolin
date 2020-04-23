@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import fr.triangle.pangolin.math.MathColumnOperation;
+
 @SuppressWarnings("rawtypes")
 public class Dataframe{
 
@@ -69,7 +71,7 @@ public class Dataframe{
 		List<Column<? extends Number>> todo = new ArrayList<>();
 		List<String> list_labels = List.of(labels);
 		for (Column c : getColumns()) {
-			if (list_labels.contains(c.label) && !c.type.equals(String.class)) {
+			if (list_labels.contains(c.label) && !c.getType().equals(String.class)) {
 				todo.add((Column<? extends Number>)c);
 			}
 		}

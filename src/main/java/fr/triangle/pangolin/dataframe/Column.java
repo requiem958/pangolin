@@ -14,8 +14,8 @@ public class Column<E> {
 		liste = new ArrayList<>();
 	}
 	protected void add(E attribut) throws ClassCastException{
-		if (attribut.getClass().equals(type)) {
-			liste.add(attribut);
+		if (attribut.getClass().equals(getType())) {
+			getListe().add(attribut);
 		}else {
 			throw new ClassCastException();
 		}
@@ -31,13 +31,13 @@ public class Column<E> {
 		
 		Column<?> that = (Column<?>) obj;
 		
-		if (this.type != that.type)
+		if (this.getType() != that.getType())
 			return false;
 		
 		if (this.label != that.label)
 			return false;
 		
-		if (this.liste.equals(that.liste))
+		if (this.getListe().equals(that.getListe()))
 			return true;
 		
 		return false;
@@ -47,7 +47,14 @@ public class Column<E> {
     public int hashCode() {
         return label.hashCode();
     }
+    
+    public int size() {
+    	return getListe().size();
+    }
 	
+	public Class<?> getType() {
+		return type;
+	}
 	public static Column<Integer> integerColumn(String label){
 		return new Column<Integer>(label, Integer.class);
 	}
@@ -58,5 +65,8 @@ public class Column<E> {
 	
 	public static Column<String> stringColumn(String label){
 		return new Column<String>(label, String.class);
+	}
+	public List<E> getListe() {
+		return liste;
 	}
 }
