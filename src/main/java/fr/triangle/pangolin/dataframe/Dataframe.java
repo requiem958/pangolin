@@ -33,9 +33,6 @@ public class Dataframe{
 		this(ParseCsv.parse(csvFile));
 	}
 
-	public boolean isEmpty() {
-		return lines.size() == 0 || columns.size() == 0;
-	}
 	public View view() {
 		return new Dataview(this);
 	}
