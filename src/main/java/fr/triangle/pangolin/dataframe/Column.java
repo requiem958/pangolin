@@ -3,7 +3,7 @@ package fr.triangle.pangolin.dataframe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Column<E> {
+public class Column<E extends Comparable<E>> {
 	String label;
 	List<E> liste;
 	Class<?> type;
