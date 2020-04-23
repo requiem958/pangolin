@@ -24,8 +24,8 @@ public class Dataframe{
 	public Dataframe(Object data[][]) {
 		this();
 		if(data != null) {
-			if (createColumns(data))
-				fillData(data);	
+			if (DataframeUtils.createColumns(this,data))
+				DataframeUtils.fillData(this,data);	
 		}
 	}
 
@@ -41,10 +41,10 @@ public class Dataframe{
 		Dataframe d = new Dataframe();
 		for (int i : lines) {
 			if (i < this.lines.size()) {
-				d.addLine(this.lines.get(i));
+				d.lines.add(this.lines.get(i));
 			}
 		}
-		d.columns.addAll(columns);
+		d.getColumns().addAll(getColumns());
 		d.labelsToInt.putAll(labelsToInt);
 		return d;
 	}
@@ -53,15 +53,33 @@ public class Dataframe{
 		Dataframe d = new Dataframe();
 		List<String> list_labels = List.of(labels);
 		int i = 0;
-		for (Column c : columns) {
+		for (Column c : getColumns()) {
 			if (list_labels.contains(c.label)) {
-				d.addColumn(c);
+				d.getColumns().add(c);
 				d.labelsToInt.put(c.label, i++);
 			}
 		}
 		d.lines.addAll(this.lines);
 		
 		return d;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Number[] operation(MathColumnOperation op, String[] labels) {
+		List<Column<? extends Number>> todo = new ArrayList<>();
+		List<String> list_labels = List.of(labels);
+		for (Column c : getColumns()) {
+			if (list_labels.contains(c.label) && !c.type.equals(String.class)) {
+				todo.add((Column<? extends Number>)c);
+			}
+		}
+		
+		Number[] result = new Number[todo.size()];
+		
+		for (int i = 0; i < todo.size(); i++) {
+			result[i] = op.op(todo.get(i));
+		}
+		return result;
 	}
 	
 	@Override
@@ -80,37 +98,59 @@ public class Dataframe{
 		if (!lines.equals(that.lines))
 			return false;
 		
-		if (!new HashSet<Column>(columns).equals(new HashSet<Column>(that.columns)))
+		if (!new HashSet<Column>(getColumns()).equals(new HashSet<Column>(that.getColumns())))
 			return false;
 		
 		return true;
     }
 
-	//Ajouter des colonnes au dataframe
-	protected boolean addColumn(Column c) {
-		columns.add(c);
-		return true;
+	public List<Column> getColumns() {
+		return columns;
 	}
+	
+}
 
-	//Ajouter des lignes au dataframe
-	protected boolean addLine(Object[] line) {
-		lines.add(new Line(line));
+class DataframeUtils{
+	static private void clear(Dataframe d) {
+		d.labelsToInt.clear();
+		d.getColumns().clear();
+		d.lines.clear();
+	}
+	
+	@SuppressWarnings("unchecked")
+	static boolean fillData(Dataframe d, Object[][] data) {
+		try {
+		for (int i = 1; i < data.length; i++) {
+			d.lines.add(new Line(data[i]));
+			for (int j = 0; j < data[i].length; j++) {
+				if (data[i][j] instanceof Double) {
+					d.getColumns().get(j).add((Double)data[i][j]);
+				}else if (data[i][j] instanceof Integer) {
+					d.getColumns().get(j).add((Integer)data[i][j]);
+				}else if (data[i][j] instanceof String) {
+					d.getColumns().get(j).add((String)data[i][j]);
+				}
+				else {
+					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
+					clear(d);
+					return false;
+				}
+			}
+		}
+		} catch(ClassCastException e) {
+			clear(d);
+		}
 		return true;
 	}
 	
-	protected boolean addLine(Line line) {
-		lines.add(line);
-		return true;
-	}
-
-
-	private boolean createColumns(Object[][] data) {
+	@SuppressWarnings({"rawtypes"})
+	static boolean createColumns(Dataframe d, Object[][] data) {
 		Column c;
 		List<String> labels = new ArrayList<>();
 		Object[] line;
 		for (int i = 0; i < data[0].length; i++) {
 			labels.add((String)data[0][i]);
-			labelsToInt.put(labels.get(i), i);
+			d.labelsToInt.put(labels.get(i), i);
 		}
 
 		line = data[1];
@@ -124,44 +164,11 @@ public class Dataframe{
 			}
 			else {
 				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
-				clear();
+				clear(d);
 				return false;
 			}
-			addColumn(c);
+			d.getColumns().add(c);
 		}
 		return true;
-	}
-
-	@SuppressWarnings("unchecked")
-	private boolean fillData(Object[][] data) {
-		try {
-		for (int i = 1; i < data.length; i++) {
-			addLine(data[i]);
-			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j] instanceof Double) {
-					columns.get(j).add((Double)data[i][j]);
-				}else if (data[i][j] instanceof Integer) {
-					columns.get(j).add((Integer)data[i][j]);
-				}else if (data[i][j] instanceof String) {
-					columns.get(j).add((String)data[i][j]);
-				}
-				else {
-					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
-					clear();
-					return false;
-				}
-
-			}
-		}
-		} catch(ClassCastException e) {
-			clear();
-		}
-		return true;
-	}
-	
-	private void clear() {
-		labelsToInt.clear();
-		columns.clear();
-		lines.clear();
 	}
 }

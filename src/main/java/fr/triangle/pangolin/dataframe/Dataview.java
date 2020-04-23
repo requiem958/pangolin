@@ -11,8 +11,8 @@ public class Dataview implements View{
 
 	@Override
 	public void printAll(PrintStream ps) {
-		for(int j = 0; j<d.columns.size(); j++) {
-			ps.print(d.columns.get(j).label + "\t|\t");
+		for(int j = 0; j<d.getColumns().size(); j++) {
+			ps.print(d.getColumns().get(j).label + "\t|\t");
 		}
 		ps.println("\n-------------------------");
 		for(int i = 0; i<d.lines.size(); i++) {

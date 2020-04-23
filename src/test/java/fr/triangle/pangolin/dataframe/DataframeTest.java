@@ -22,12 +22,12 @@ public class DataframeTest{
     
 	private void goodDataAttributes() {
 		assertEquals(2, d.lines.size());
-		assertEquals(2, d.columns.size());
+		assertEquals(2, d.getColumns().size());
 		assertEquals(2, d.labelsToInt.keySet().size());
-		assertEquals("nom",d.columns.get(0).label);
-		assertEquals("age",d.columns.get(1).label);
-		assertEquals(String.class,d.columns.get(0).type);
-		assertEquals(Integer.class,d.columns.get(1).type);
+		assertEquals("nom",d.getColumns().get(0).label);
+		assertEquals("age",d.getColumns().get(1).label);
+		assertEquals(String.class,d.getColumns().get(0).type);
+		assertEquals(Integer.class,d.getColumns().get(1).type);
 	}
 	
     @Test(expected = None.class)
@@ -39,12 +39,12 @@ public class DataframeTest{
     public void testDataframeLoadFromGoodDoubleCSV() throws FileNotFoundException {
 		d = new Dataframe("./annexes/testGoodDoubleCSV.csv");
 		assertEquals(2, d.lines.size());
-		assertEquals(2, d.columns.size());
+		assertEquals(2, d.getColumns().size());
 		assertEquals(2, d.labelsToInt.keySet().size());
-		assertEquals("nom",d.columns.get(0).label);
-		assertEquals("age",d.columns.get(1).label);
-		assertEquals(String.class,d.columns.get(0).type);
-		assertEquals(Double.class,d.columns.get(1).type);
+		assertEquals("nom",d.getColumns().get(0).label);
+		assertEquals("age",d.getColumns().get(1).label);
+		assertEquals(String.class,d.getColumns().get(0).type);
+		assertEquals(Double.class,d.getColumns().get(1).type);
     }
     
     @Test(expected = FileNotFoundException.class)
@@ -55,7 +55,7 @@ public class DataframeTest{
     public void testDataframeEmptyFile() throws FileNotFoundException{
 		d = new Dataframe("./annexes/empty.csv");
 		assertEquals(0, d.lines.size());
-		assertEquals(0, d.columns.size());
+		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
     }
     
@@ -69,7 +69,7 @@ public class DataframeTest{
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
 		assertEquals(0, d.lines.size());
-		assertEquals(0, d.columns.size());
+		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
     
@@ -77,7 +77,7 @@ public class DataframeTest{
 	public void testDataframeFromBadTypeDataCheckOk() {
 		d = new Dataframe(BadTypeDataCheckOk);
 		assertEquals(0, d.lines.size());
-		assertEquals(0, d.columns.size());
+		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
     
@@ -85,7 +85,7 @@ public class DataframeTest{
 	public void testDataframeFromBadTypeDataCheckNotOk() {
 		d = new Dataframe(BadTypeDataCheckNotOk);
 		assertEquals(0, d.lines.size());
-		assertEquals(0, d.columns.size());
+		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
 	
@@ -93,12 +93,12 @@ public class DataframeTest{
 	public void testDataframeFromGoodDataDouble() {
 		d = new Dataframe(GoodDataDouble);
 		assertEquals(2, d.lines.size());
-		assertEquals(2, d.columns.size());
+		assertEquals(2, d.getColumns().size());
 		assertEquals(2, d.labelsToInt.keySet().size());
-		assertEquals("nom",d.columns.get(0).label);
-		assertEquals("age",d.columns.get(1).label);
-		assertEquals(String.class,d.columns.get(0).type);
-		assertEquals(Double.class,d.columns.get(1).type);
+		assertEquals("nom",d.getColumns().get(0).label);
+		assertEquals("age",d.getColumns().get(1).label);
+		assertEquals(String.class,d.getColumns().get(0).type);
+		assertEquals(Double.class,d.getColumns().get(1).type);
 	}
     /*
     @Test
@@ -120,12 +120,12 @@ public class DataframeTest{
 		Dataframe d2 = d.fromLines(lines);
 		assertNotNull(d2);
 		assertEquals(1, d2.lines.size());
-		assertEquals(2, d2.columns.size());
+		assertEquals(2, d2.getColumns().size());
 		assertEquals(2, d2.labelsToInt.keySet().size());
-		assertEquals("nom",d2.columns.get(0).label);
-		assertEquals("age",d2.columns.get(1).label);
-		assertEquals(String.class,d2.columns.get(0).type);
-		assertEquals(Integer.class,d2.columns.get(1).type);
+		assertEquals("nom",d2.getColumns().get(0).label);
+		assertEquals("age",d2.getColumns().get(1).label);
+		assertEquals(String.class,d2.getColumns().get(0).type);
+		assertEquals(Integer.class,d2.getColumns().get(1).type);
 		
 	}
     @Test
@@ -135,12 +135,12 @@ public class DataframeTest{
 		Dataframe d2 = d.fromLines(lines);
 		assertNotNull(d2);
 		assertNotEquals(3, d2.lines.size());
-		assertEquals(2, d2.columns.size());
+		assertEquals(2, d2.getColumns().size());
 		assertEquals(2, d2.labelsToInt.keySet().size());
-		assertEquals("nom",d2.columns.get(0).label);
-		assertEquals("age",d2.columns.get(1).label);
-		assertEquals(String.class,d2.columns.get(0).type);
-		assertEquals(Integer.class,d2.columns.get(1).type);
+		assertEquals("nom",d2.getColumns().get(0).label);
+		assertEquals("age",d2.getColumns().get(1).label);
+		assertEquals(String.class,d2.getColumns().get(0).type);
+		assertEquals(Integer.class,d2.getColumns().get(1).type);
 		
 	}
     @Test
@@ -150,10 +150,10 @@ public class DataframeTest{
 		Dataframe d2 = d.fromColumns(columns);
 		assertNotNull(d2);
 		assertEquals(2, d2.lines.size());
-		assertEquals(1, d2.columns.size());
+		assertEquals(1, d2.getColumns().size());
 		assertEquals(1, d2.labelsToInt.keySet().size());
-		assertEquals("nom",d2.columns.get(0).label);
-		assertEquals(String.class,d2.columns.get(0).type);
+		assertEquals("nom",d2.getColumns().get(0).label);
+		assertEquals(String.class,d2.getColumns().get(0).type);
 	}
     @Test
 	public void testDataFrameEquals() {
