@@ -13,7 +13,7 @@ public class Column<E extends Comparable<E>> {
 		this.type = type;
 		liste = new ArrayList<>();
 	}
-	protected void add(E attribut) throws ClassCastException{
+	public void add(E attribut) throws ClassCastException{
 		if (attribut.getClass().equals(getType())) {
 			getListe().add(attribut);
 		}else {

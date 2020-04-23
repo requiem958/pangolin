@@ -5,11 +5,6 @@ import fr.triangle.pangolin.dataframe.Column;
 public class Mean extends Sum {
 
 	@Override
-	protected String name() {
-		return "MOYENNE";
-	}
-
-	@Override
 	protected int endOpOnInteger(Integer a, Column<Integer> c) {
 		return a/c.getListe().size();
 	}

@@ -4,21 +4,13 @@ import fr.triangle.pangolin.dataframe.Column;
 
 public abstract class MathColumnOperation {
 
-	public Number op(Column<? extends Number> c) throws ArithmeticException{
+	public Number op(Column<? extends Number> c) throws ArithmeticException, ClassCastException{
 		Number var = 0;
 		for (Number n : c.getListe()) {
 			var = doOp(var,n);
-			if(var == null)
-				throwArithExc();
 		}
 		var = doEndOp(var,c);
-		if(var == null)
-			throwArithExc();
 		return var;
-	}
-	
-	protected void throwArithExc()throws ArithmeticException{
-		throw new ArithmeticException("On ne peut pas "+name()+" sur des string");
 	}
 	
 	protected abstract Integer opOnInteger(Integer a, Integer b) throws ArithmeticException;
@@ -45,9 +37,5 @@ public abstract class MathColumnOperation {
 			return opOnDouble(a.doubleValue(), b.doubleValue());
 		//on a une string
 		return null;
-	}
-	
-	protected String name() {
-		return "Generic";
 	}
 }

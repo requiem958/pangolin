@@ -5,11 +5,6 @@ import fr.triangle.pangolin.dataframe.Column;
 public class Sum extends MathColumnOperation {
 
 	@Override
-	protected String name() {
-		return "SUM";
-	}
-
-	@Override
 	protected Integer opOnInteger(Integer a, Integer b) {
 		return a + b;
 	}
