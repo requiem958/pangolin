@@ -1,13 +1,21 @@
 package fr.triangle.pangolin.dataframe;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
 import org.junit.Test.None;
+
+import fr.triangle.pangolin.math.Comparison;
+import fr.triangle.pangolin.math.Max;
+import fr.triangle.pangolin.math.Mean;
+import fr.triangle.pangolin.math.Min;
+import fr.triangle.pangolin.math.Sum;
 
 public class DataframeTest{
 
@@ -169,5 +177,64 @@ public class DataframeTest{
     	assertEquals(d, d2);
     	GoodData[0][0] = "nom";
 	}
+    
+    @Test
+    public void testWhereEasy() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = d.where("nom", "Robert", Comparison.EQUAL);
+    	assertEquals(1, d2.lines.size());
+    	assertEquals(d.getColumns().size(), d2.getColumns().size());
+    	assertNotEquals(d, d2);
+    	assertEquals(d2, d2.where("nom", "Robert", Comparison.EQUAL));
+    }
+    
+    @Test
+    public void testWhereNot() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = d.where("nom", "Robert", Comparison.NOT_EQUAL);
+    	assertEquals(1, d2.lines.size());
+    	assertEquals(d.getColumns().size(), d2.getColumns().size());
+    	assertNotEquals(d, d2);
+    	assertEquals(d2, d2.where("nom", "Robert", Comparison.NOT_EQUAL));
+    }
+    
+    @Test
+    public void testWhereSup() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = d.where("age", 9, Comparison.STRICT_SUP);
+    	assertEquals(d, d2);
+    	assertEquals(d2, d2.where("age", 9, Comparison.STRICT_SUP));
+    }
+    
+    @Test
+    public void testWhereInf() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = d.where("age", 20, Comparison.STRICT_INF);
+    	assertEquals(d, d2);
+    	assertEquals(d2, d2.where("age", 20, Comparison.STRICT_INF));
+    }
+    
+    @Test
+    public void testWhereErrors() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = d.where("age", "20", Comparison.STRICT_INF);
+    	assertNull(d2);
+    	d2 = d.where("nonexistant", "20", Comparison.STRICT_INF);
+    	assertNull(d2);
+    }
+    
+    @Test
+    public void testMath() {
+    	d = new Dataframe(GoodData);
+    	Integer[] value = {10};
+    	String[] labels = {"age"};
+    	assertArrayEquals(value, d.operation(new Min(), labels));
+    	value[0] = 11;
+    	assertArrayEquals(value, d.operation(new Max(), labels));
+    	value[0] = 10;
+    	assertArrayEquals(value, d.operation(new Mean(), labels));
+    	value[0] = 21;
+    	assertArrayEquals(value, d.operation(new Sum(), labels));
+    }
     
 }

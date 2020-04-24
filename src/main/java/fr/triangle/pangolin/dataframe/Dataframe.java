@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import fr.triangle.pangolin.math.Comparison;
 import fr.triangle.pangolin.math.MathColumnOperation;
@@ -72,7 +71,7 @@ public class Dataframe{
 	
 	
 	@SuppressWarnings("unchecked")
-	public Dataframe where(String column, Comparable value, Comparison cmp) {
+	public Dataframe where(String column, Comparable value, Comparison cmp){
 		List<Line> newLines = new ArrayList<>();
 		Integer where = labelsToInt.get(column);
 		
@@ -93,13 +92,11 @@ public class Dataframe{
 				ok = !value.equals(inside);
 				break;
 			case STRICT_SUP:
-				ok = value.compareTo(inside) == 1;
-				break;
-			case STRICT_INF:
 				ok = value.compareTo(inside) == -1;
 				break;
-			default:
-				throw new NoSuchElementException("This comparison does not exist");
+			case STRICT_INF:
+				ok = value.compareTo(inside) == 1;
+				break;
 			}
 			if (ok)
 				newLines.add(lines.get(i));
