@@ -47,10 +47,6 @@ public class Column<E extends Comparable<E>> {
     public int hashCode() {
         return label.hashCode();
     }
-    
-    public int size() {
-    	return getListe().size();
-    }
 	
 	public Class<?> getType() {
 		return type;

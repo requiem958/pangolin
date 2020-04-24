@@ -10,14 +10,14 @@ public class Dataview implements View{
 	public Dataview(Dataframe dataframe) {
 		d = dataframe;
 		nbLigne = d.lines.size();
-		nbCol = d.columns.size();
+		nbCol = d.getColumns().size();
 	}
 
 
 	public void printBeatifull(PrintStream ps) {
 		for(int j = 0; j<nbCol; j++) {
 
-			ps.print(d.columns.get(j).label + "\t|\t");
+			ps.print(d.getColumns().get(j).label + "\t|\t");
 		}
 		ps.println("\n-------------------------");
 		for(int i = 0; i<nbLigne; i++) {
@@ -39,7 +39,7 @@ public class Dataview implements View{
 		int max = Math.min(e, nbLigne);
 
 		for(int j = 0; j<nbCol-1; j++) {
-			ps.print(d.columns.get(j).label + ";");
+			ps.print(d.getColumns().get(j).label + ";");
 		}
 		ps.println(d.columns.get(nbCol-1).label); //le dernier label
 		for(int i = s-1; i<max; i++) {

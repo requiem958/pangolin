@@ -2,10 +2,13 @@ package fr.triangle.pangolin.math;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Before;
 import org.junit.Test;
 
 import fr.triangle.pangolin.dataframe.Column;
+
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class MathTest {
 
 	Column<Integer> cInt;
@@ -53,7 +56,9 @@ public class MathTest {
 		assertEquals(5, mean.op(cInt));
 		assertEquals(5.0, mean.op(cDouble));
 	}
+
 	
+
 	@Test(expected = ClassCastException.class)
 	public void maxOnString() {
 		max.op((Column) cS);
