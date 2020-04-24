@@ -34,8 +34,6 @@ public abstract class MathColumnOperation {
 	protected Number doOp(Number a, Number b) throws ArithmeticException {
 		if (a == null)
 			return b;
-		if (b == null)
-			return a;
 		if (a instanceof Integer)
 			return opOnInteger(a.intValue(),b.intValue());
 		else //if (a instanceof Double)
