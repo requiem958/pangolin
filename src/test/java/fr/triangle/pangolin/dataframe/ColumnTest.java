@@ -11,7 +11,7 @@ public class ColumnTest {
 	public void testColumn() {
 		Column<Integer> c = Column.integerColumn("col");
 		assertEquals("col",c.label);
-		assertEquals(Integer.class,c.type);
+		assertEquals(Integer.class,c.getType());
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
@@ -25,14 +25,14 @@ public class ColumnTest {
 	public void testGoodAdd() {
 		Column<Integer> c = Column.integerColumn("col");
 		c.add(10);
-		assertEquals(1, c.liste.size());
+		assertEquals(1, c.getListe().size());
 	}
 	
 	@Test
 	public void testGoodAddString() {
 		Column<String> c = Column.stringColumn("col");
 		c.add("test");
-		assertEquals(1, c.liste.size());
+		assertEquals(1, c.getListe().size());
 	}
 	
 	@Test

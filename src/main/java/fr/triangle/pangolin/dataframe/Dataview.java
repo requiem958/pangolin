@@ -5,18 +5,18 @@ import java.io.PrintStream;
 public class Dataview implements View{
 
 	Dataframe d;
-	int nbLigne; 
+	int nbLigne;
 	int nbCol;
 	public Dataview(Dataframe dataframe) {
 		d = dataframe;
-		nbLigne = d.lines.size(); 
+		nbLigne = d.lines.size();
 		nbCol = d.columns.size();
 	}
 
-	
+
 	public void printBeatifull(PrintStream ps) {
 		for(int j = 0; j<nbCol; j++) {
-			
+
 			ps.print(d.columns.get(j).label + "\t|\t");
 		}
 		ps.println("\n-------------------------");
@@ -27,17 +27,17 @@ public class Dataview implements View{
 			ps.println();
 		}
 	}
-	
+
 	@Override
 	public void printAll(PrintStream ps) {
 		printPrecise(ps, 1, nbLigne);
 	}
-	
+
 	//pour les 3 premieres s = 1 et e = 3
 	private void printPrecise(PrintStream ps, int s, int e) {
-		
+
 		int max = Math.min(e, nbLigne);
-		
+
 		for(int j = 0; j<nbCol-1; j++) {
 			ps.print(d.columns.get(j).label + ";");
 		}
@@ -49,18 +49,18 @@ public class Dataview implements View{
 			ps.println(d.lines.get(i).get(d.lines.get(0).length-1)); //le denier argument de la ligne
 		}
 		ps.println();
-		
+
 	}
 	@Override
 	public void printFirst(PrintStream ps) {
 		printPrecise(ps, 1, 10);
-		
+
 	}
 
 	@Override
 	public void printFirst(PrintStream ps, int n) {
 		printPrecise(ps, 1, n);
-		
+
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Dataview implements View{
 	@Override
 	public void printLast(PrintStream ps, int n) {
 		printPrecise(ps, Math.max(1, nbLigne-n+1), nbLigne);
-		
+
 	}
 
 	@Override

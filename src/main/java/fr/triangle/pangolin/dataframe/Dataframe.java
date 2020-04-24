@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import fr.triangle.pangolin.math.Comparison;
+import fr.triangle.pangolin.math.MathColumnOperation;
 
 @SuppressWarnings("rawtypes")
 public class Dataframe{
@@ -24,8 +28,8 @@ public class Dataframe{
 	public Dataframe(Object data[][]) {
 		this();
 		if(data != null) {
-			if (createColumns(data))
-				fillData(data);	
+			if (DataframeUtils.createColumns(this,data))
+				DataframeUtils.fillData(this,data);	
 		}
 	}
 
@@ -33,18 +37,20 @@ public class Dataframe{
 		this(ParseCsv.parse(csvFile));
 	}
 
-	public View view() {
-		return new Dataview(this);
-	}
-
 	public Dataframe fromLines(int lines[]) {
-		Dataframe d = new Dataframe();
+		List<Line> newLines = new ArrayList<>();
 		for (int i : lines) {
 			if (i < this.lines.size()) {
-				d.addLine(this.lines.get(i));
+				newLines.add(this.lines.get(i));
 			}
 		}
-		d.columns.addAll(columns);
+		return fromLines(newLines);
+	}
+	
+	private Dataframe fromLines(List<Line> newLines) {
+		Dataframe d = new Dataframe();
+		d.lines.addAll(newLines);
+		d.getColumns().addAll(getColumns());
 		d.labelsToInt.putAll(labelsToInt);
 		return d;
 	}
@@ -53,15 +59,70 @@ public class Dataframe{
 		Dataframe d = new Dataframe();
 		List<String> list_labels = List.of(labels);
 		int i = 0;
-		for (Column c : columns) {
+		for (Column c : getColumns()) {
 			if (list_labels.contains(c.label)) {
-				d.addColumn(c);
+				d.getColumns().add(c);
 				d.labelsToInt.put(c.label, i++);
 			}
 		}
 		d.lines.addAll(this.lines);
 		
 		return d;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public Dataframe where(String column, Comparable value, Comparison cmp) {
+		List<Line> newLines = new ArrayList<>();
+		Integer where = labelsToInt.get(column);
+		
+		if (where == null)
+			return null;
+		
+		if (!columns.get(where).getType().equals(value.getClass()))
+			return null;
+		
+		for (int i = 0; i < lines.size(); i++) {
+			Object inside = lines.get(i).get(where);
+			boolean ok = false;
+			switch (cmp) {
+			case EQUAL:
+				ok = value.equals(inside);
+				break;
+			case NOT_EQUAL:
+				ok = !value.equals(inside);
+				break;
+			case STRICT_SUP:
+				ok = value.compareTo(inside) == 1;
+				break;
+			case STRICT_INF:
+				ok = value.compareTo(inside) == -1;
+				break;
+			default:
+				throw new NoSuchElementException("This comparison does not exist");
+			}
+			if (ok)
+				newLines.add(lines.get(i));
+		}
+		return fromLines(newLines);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Number[] operation(MathColumnOperation op, String[] labels) {
+		List<Column<? extends Number>> todo = new ArrayList<>();
+		List<String> list_labels = List.of(labels);
+		for (Column c : getColumns()) {
+			if (list_labels.contains(c.label) && !c.getType().equals(String.class)) {
+				todo.add((Column<? extends Number>)c);
+			}
+		}
+		
+		Number[] result = new Number[todo.size()];
+		
+		for (int i = 0; i < todo.size(); i++) {
+			result[i] = op.op(todo.get(i));
+		}
+		return result;
 	}
 	
 	@Override
@@ -80,100 +141,19 @@ public class Dataframe{
 		if (!lines.equals(that.lines))
 			return false;
 		
-		if (!new HashSet<Column>(columns).equals(new HashSet<Column>(that.columns)))
+		if (!new HashSet<Column>(getColumns()).equals(new HashSet<Column>(that.getColumns())))
 			return false;
 		
 		return true;
     }
-	
-	@Override
-	public int hashCode() {
-		int hashCode = 17;
-		for (Column c : columns) {
-			hashCode ^= c.hashCode();
-		}
-		return hashCode;
-	}
 
-	//Ajouter des colonnes au dataframe
-	protected boolean addColumn(Column c) {
-		if (columns.contains(c)) {
-			return false;
-		}
-		columns.add(c);
-		return true;
-	}
-
-	//Ajouter des lignes au dataframe
-	protected boolean addLine(Object[] line) {
-		lines.add(new Line(line));
-		return true;
+	public List<Column> getColumns() {
+		return columns;
 	}
 	
-	protected boolean addLine(Line line) {
-		lines.add(line);
-		return true;
-	}
 
-
-	private boolean createColumns(Object[][] data) {
-		Column c;
-		List<String> labels = new ArrayList<>();
-		Object[] line;
-		for (int i = 0; i < data[0].length; i++) {
-			labels.add((String)data[0][i]);
-			labelsToInt.put(labels.get(i), i);
-		}
-
-		line = data[1];
-		for (int i = 0; i < line.length; i++) {
-			if (line[i] instanceof Double) {
-				c = Column.doubleColumn(labels.get(i));
-			}else if (line[i] instanceof Integer) {
-				c = Column.integerColumn(labels.get(i));
-			}else if (line[i] instanceof String) {
-				c = Column.stringColumn(labels.get(i));
-			}
-			else {
-				System.err.println("Not a int / double / string value : (1,"+i+" : "+line[i]);
-				clear();
-				return false;
-			}
-			addColumn(c);
-		}
-		return true;
-	}
-
-	@SuppressWarnings("unchecked")
-	private boolean fillData(Object[][] data) {
-		try {
-		for (int i = 1; i < data.length; i++) {
-			addLine(data[i]);
-			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j] instanceof Double) {
-					columns.get(j).add((Double)data[i][j]);
-				}else if (data[i][j] instanceof Integer) {
-					columns.get(j).add((Integer)data[i][j]);
-				}else if (data[i][j] instanceof String) {
-					columns.get(j).add((String)data[i][j]);
-				}
-				else {
-					System.err.println("Not a int / double / string value : (line="+i+",col="+j+") : "+data[i][j]);
-					clear();
-					return false;
-				}
-
-			}
-		}
-		} catch(ClassCastException e) {
-			clear();
-		}
-		return true;
+	public View view() {
+		return new Dataview(this);
 	}
 	
-	private void clear() {
-		labelsToInt.clear();
-		columns.clear();
-		lines.clear();
-	}
 }
