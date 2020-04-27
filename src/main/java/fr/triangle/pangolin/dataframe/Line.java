@@ -36,7 +36,7 @@ public class Line{
 	
 	@Override
 	public int hashCode() {
-		int hashcode = 0xff;
+		int hashcode = 0x17;
 		for (Object o : line) {
 			hashcode ^= o.hashCode();
 		}

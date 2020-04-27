@@ -5,7 +5,7 @@ import fr.triangle.pangolin.dataframe.Column;
 public abstract class MathColumnOperation {
 
 	public Number op(Column<? extends Number> c) throws ArithmeticException, ClassCastException{
-		Number var = 0;
+		Number var = null;
 		for (Number n : c.getListe()) {
 			var = doOp(var,n);
 		}
@@ -21,21 +21,24 @@ public abstract class MathColumnOperation {
 
 	@SuppressWarnings("unchecked")
 	protected Number doEndOp(Number var, Column<? extends Number> c) throws ArithmeticException {
+		
 		if (c.getType().equals(Integer.class))
-			return endOpOnInteger(var.intValue(),(Column<Integer>)c);
-		else if (c.getType().equals(Double.class))
-			return endOpOnDouble(var.doubleValue(),(Column<Double>)c);
+			return endOpOnInteger(var == null ? null : var.intValue(),(Column<Integer>)c);
+		else //if (c.getType().equals(Double.class))
+			return endOpOnDouble(var == null ? null : var.doubleValue(),(Column<Double>)c);
 		//on a une string
-		return null;
+		//return null;
 	}
 
 	
 	protected Number doOp(Number a, Number b) throws ArithmeticException {
+		if (a == null)
+			return b;
 		if (a instanceof Integer)
 			return opOnInteger(a.intValue(),b.intValue());
-		else if (a instanceof Double)
+		else //if (a instanceof Double)
 			return opOnDouble(a.doubleValue(), b.doubleValue());
 		//on a une string
-		return null;
+		//return null;
 	}
 }
