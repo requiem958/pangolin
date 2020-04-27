@@ -13,6 +13,7 @@ public class DataframeTest{
 
 	protected Dataframe d;
 	protected static Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
+	protected static Object[][] GoodDataLinePlus = { {"nom","age", "prenom"}, {"Robert", (Integer) 10, "george"}, {"Marc", (Integer) 11,"george"} };
 	protected static Object[][] GoodDataBis = { {"nom","nbEnfants"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
 	protected static Object[][] GoodDataDouble = { {"nom","age"}, {"Robert", (Double) 10.1}, {"Marc", (Double) 11.1} };
 	protected static Object[][] DataWithSameNameColumn = { {"nom","age","age"}, {"Robert", (Integer) 10,(Integer) 10}, {"Marc", (Integer) 11,(Integer) 10} };
@@ -168,6 +169,18 @@ public class DataframeTest{
     	assertNotEquals(d, d4);
     	assertEquals(d, d2);
     	GoodData[0][0] = "nom";
+	}
+    @Test
+	public void testLine() {
+    	d = new Dataframe(GoodData);
+    	Dataframe d2 = new Dataframe(GoodData);
+    	Dataframe d3 = new Dataframe(GoodDataDouble);
+    	Dataframe d4 = new Dataframe(GoodDataLinePlus);
+    	assertEquals(d.lines.get(0), d.lines.get(0));
+    	assertNotEquals(d.lines.get(0), null);
+    	assertNotEquals(d.lines.get(0), d3.lines.get(0));
+    	assertNotEquals(d.lines.get(0), d4.lines.get(0));
+    	assertEquals(d.lines.get(0), d2.lines.get(0));
 	}
     
 }
