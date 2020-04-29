@@ -161,9 +161,7 @@ public class DataframeTest{
 		assertNotNull(d2);
 		assertEquals(2, d2.lines.size());
 		
-		//test rajoute !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		assertEquals(1, d2.lines.get(0).length);
-		//
+		assertEquals(columns.length, d2.lines.get(0).length);
 		assertEquals(1, d2.getColumns().size());
 		assertEquals(1, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
