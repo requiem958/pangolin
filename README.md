@@ -17,6 +17,9 @@ Actuellement il est possible de :
 3. Récupérer un dataframe par ses colonnes
 4. Récupérer un dataframe par ses lignes
 5. Afficher entièrement un dataframe
+6. Selection avancée avec WHERE et des opérateurs sur une colonne (<,>,=,!=)
+7. Affichage partiel, sympathique.
+8. Opérations mathématiques simples sur les colonnes.
 
 ## Outils utilisés
 
@@ -33,5 +36,10 @@ Nous avons aussi trois outils pour assurer la qualité du code :
 * Codefactor : Gestion de la qualité du code, pour corriger les oublis dans le code et utiliser les bonnes pratiques. 
 
 ## Déploiement docker
+
+Une image permettant de lancer l'application de test est disponible sur docker hub à l'adresse :
+[DockerHub](https://hub.docker.com/r/monnierm/pangolin)
+
+L'application de test affiche un fichier CSV sur lequel on effectue des sélections, des opérations ...
 
 ## Feedback
