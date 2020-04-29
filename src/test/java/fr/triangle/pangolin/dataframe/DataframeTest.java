@@ -21,6 +21,7 @@ public class DataframeTest{
 
 	protected Dataframe d;
 	protected static Object[][] GoodData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
+	protected static Object[][] GoodData3colum = { {"nom","age", "taille"}, {"Robert", (Integer) 10, (Integer) 115}, {"Marc", (Integer) 11, (Integer) 111}};
 	protected static Object[][] GoodDataLinePlus = { {"nom","age", "prenom"}, {"Robert", (Integer) 10, "george"}, {"Marc", (Integer) 11,"george"} };
 	protected static Object[][] GoodDataBis = { {"nom","nbEnfants"}, {"Robert", (Integer) 10}, {"Marc", (Integer) 11} };
 	protected static Object[][] GoodDataDouble = { {"nom","age"}, {"Robert", (Double) 10.1}, {"Marc", (Double) 11.1} };
@@ -159,10 +160,25 @@ public class DataframeTest{
 		Dataframe d2 = d.fromColumns(columns);
 		assertNotNull(d2);
 		assertEquals(2, d2.lines.size());
+		
+		//test rajoute !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		assertEquals(1, d2.lines.get(0).length);
+		//
 		assertEquals(1, d2.getColumns().size());
 		assertEquals(1, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
 		assertEquals(String.class,d2.getColumns().get(0).getType());
+		
+    	d = new Dataframe(GoodData3colum);
+    	String[] columnsprime = {"nom","age"};
+		d2 = d.fromColumns(columnsprime);
+		assertNotNull(d2);
+		assertEquals(2, d2.lines.size());
+		assertEquals(2, d2.getColumns().size());
+		assertEquals(2, d2.labelsToInt.keySet().size());
+		assertEquals("nom",d2.getColumns().get(0).label);
+		assertEquals(String.class,d2.getColumns().get(0).getType());
+		
 	}
     @Test
 	public void testDataFrameEquals() {

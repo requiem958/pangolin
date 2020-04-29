@@ -18,12 +18,15 @@ public class App
     	
     	File fileColum, fileMeans, fileMDix;
     	fileColum = new File("./annexes/fileColum.txt");
-    	ps = new PrintStream(fileColum);
+    	fileMeans = new File("./annexes/fileMeans.txt");
+    	fileMDix = new File("./annexes/fileMDix.txt");
     	
+    	ps = new PrintStream(fileColum); 	
     	dbase = new Dataframe("./annexes/appCSV.csv");
+    	
     	String[] columns = {"nom","age"};
     	dprime = dbase.fromColumns(columns);
-    	dv = new Dataview(dbase);
+    	dv = new Dataview(dprime);
     	dv.printBeatifull(System.out);
     	dv.printAll(ps);
     	ps.close();

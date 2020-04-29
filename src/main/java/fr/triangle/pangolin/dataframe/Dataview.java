@@ -19,7 +19,7 @@ public class Dataview implements View{
 
 			ps.print(d.getColumns().get(j).label + "\t|\t");
 		}
-		ps.println("\n-------------------------");
+		ps.println("\n");
 		for(int i = 0; i<nbLigne; i++) {
 			for(int k = 0; k<d.lines.get(0).length; k++) {
 				ps.print(d.lines.get(i).get(k) + "\t|\t");
