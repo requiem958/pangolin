@@ -14,7 +14,7 @@ public class Dataview implements View{
 	}
 
 
-	public void printBeatifull(PrintStream ps) {
+	public void printBeautifull(PrintStream ps) {
 		for(int j = 0; j<nbCol; j++) {
 
 			ps.print(d.getColumns().get(j).label + "\t|\t");

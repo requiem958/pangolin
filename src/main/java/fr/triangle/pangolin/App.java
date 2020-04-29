@@ -1,9 +1,5 @@
 package fr.triangle.pangolin;
 
-import static org.junit.Assert.assertArrayEquals;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -24,33 +20,16 @@ public class App
     	Dataview dv;
     	PrintStream ps;
     	
-    	File fileColum, fileMath, fileWhere;
-    	fileColum = new File("./annexes/fileColum.txt");
-    	if(!fileColum.exists()) {
-    		fileColum.createNewFile();
-    	}
-    	fileMath = new File("./annexes/fileMath.txt");
-    	if(!fileMath.exists()) {
-    		fileMath.createNewFile();
-    	}
-    	fileWhere = new File("./annexes/fileWhere.txt");
-    	if(!fileWhere.exists()) {
-    		fileWhere.createNewFile();
-    	}
-    	
-    	
-    	
-    	
-    	ps = new PrintStream(fileColum); 	
+    	ps = System.out;	
     	dbase = new Dataframe("./annexes/appCSV.csv");
     	
     	String[] columns = {"nom","age"};
     	dprime = dbase.fromColumns(columns);
     	dv = new Dataview(dprime);
-    	dv.printBeatifull(System.out);
-    	dv.printAll(ps);
+    	dv.printBeautifull(ps);
+    	ps.println();
     	
-    	ps = new PrintStream(fileMath);
+
     	String[] labels = {"taille"};
     	Number[] value = {0};
     	ps.println("Differentes valeurs de Taille :");
@@ -62,30 +41,56 @@ public class App
     	ps.println("Moyenne : " + value[0]);
     	value = dbase.operation(new Sum(), labels);
     	ps.println("Somme : " + value[0]);
-    	ps.close(); 
+    	 
     	
-    	ps = new PrintStream(fileWhere);
     	ps.println("Differentes valeurs de Taille :");
     	ps.println();
     	dprime = dbase.where("taille", 130.0, Comparison.STRICT_INF);
     	ps.println("Taille inferieure a 130 : ");
     	ps.println();
     	dv = new Dataview(dprime);
-    	dv.printAll(ps);
+    	dv.printBeautifull(ps);
     	ps.println();
 
     	dprime = dbase.where("taille", 130.0, Comparison.STRICT_SUP);
     	ps.println("Taille superieur a 130 : ");
     	ps.println();
     	dv = new Dataview(dprime);
-    	dv.printAll(ps);
+    	dv.printBeautifull(ps);
     	ps.println();
     	
     	dprime = dbase.where("taille", 130.0, Comparison.EQUAL);
     	ps.println("Taille inferieure a 130 : ");
     	ps.println();
     	dv = new Dataview(dprime);
-    	dv.printAll(ps);
+    	dv.printBeautifull(ps);
+    	ps.println();
+    	
+    	ps.println("10 dernieres lignes : ");
+    	ps.println();
+    	dv = new Dataview(dbase);
+    	dv.printLast(ps);
+    	ps.println();
+    
+    	
+    	ps.println("14 dernieres lignes : ");
+    	ps.println();
+    	dv = new Dataview(dbase);
+    	dv.printLast(ps,14);
+    	ps.println();
+
+    	
+    	ps.println("10 premieres lignes : ");
+    	ps.println();
+    	dv = new Dataview(dbase);
+    	dv.printFirst(ps);
+    	ps.println();
+
+    	
+    	ps.println("14 derniere ligne : ");
+    	ps.println();
+    	dv = new Dataview(dbase);
+    	dv.printFirst(ps,14);
     	ps.println();
     	
     	ps.close();

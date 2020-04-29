@@ -5,7 +5,7 @@
 
 	<groupId>fr.triangle</groupId>
 	<artifactId>pangolin</artifactId>
-	<version>0.0.4</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>pangolin</name>
