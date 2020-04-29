@@ -6,4 +6,4 @@ RUN apt-get install git
 RUN git clone https://github.com/requiem958/pangolin.git
 RUN cd pangolin && mvn
 
-CMD java -jar target/pangolin.jar 
+CMD java -jar /pangolin/target/pangolin.jar 
