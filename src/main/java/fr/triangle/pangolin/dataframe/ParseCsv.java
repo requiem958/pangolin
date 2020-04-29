@@ -30,7 +30,6 @@ public class ParseCsv {
 			}
 			for (int i = 0; i < liste.size(); i++) {
 				for(int j = 0; j < liste.get(0).length; j++) {
-					System.out.println("i:"+ i + " " +"j"+ j+"liste "+ liste.get(i) );
 					tab[i][j] = checkType(liste.get(i)[j]);
 				}
 			}
