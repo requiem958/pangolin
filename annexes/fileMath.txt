@@ -1,0 +1,5 @@
+Differentes valeurs de Taille :
+Minimum : 104.0
+Maximum : 169.0
+Moyenne : 133.375
+Somme : 2134.0

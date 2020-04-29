@@ -1,0 +1,33 @@
+Differentes valeurs de Taille :
+
+Taille inferieure a 130 : 
+
+nom;age;taille
+Marc;10;117.0
+Justine;10;125.0
+Luc;10;104.0
+Joe;10;114.0
+Michel;10;124.0
+Misso;10;109.0
+
+
+Taille superieur a 130 : 
+
+nom;age;taille
+Robert;10;159.0
+Lea;10;143.0
+Zozo;10;142.0
+James;10;169.0
+Picasso;10;146.0
+Thierry;10;139.0
+Nina;10;144.0
+Chobon;10;139.0
+
+
+Taille inferieure a 130 : 
+
+nom;age;taille
+Fizz;10;130.0
+Shaco;10;130.0
+
+
