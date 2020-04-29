@@ -9,8 +9,6 @@ services:
   - docker
 
 script:
+  - mvn test
   - docker build --tag pangolin .
   - docker run pangolin
-
-after_script:
-  - docker images
