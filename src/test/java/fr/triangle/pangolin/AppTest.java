@@ -3,6 +3,7 @@ package fr.triangle.pangolin;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -12,9 +13,10 @@ import org.junit.Test;
 public class AppTest 
 {
 	@Test
-    public void testApp() throws FileNotFoundException
+    public void testApp() throws IOException
     {
+		App.main(null);
         assertTrue( true );
-        App.main(null);
+
     }
 }
