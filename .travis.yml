@@ -15,3 +15,4 @@ script:
   - docker pull monnierm/pangolin:latest
   - docker build --cache-from=monnierm/pangolin:latest . -t mmonierm/pangolin:latest
   - docker run monnierm/pangolin:latest
+  - mvn test
