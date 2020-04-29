@@ -12,10 +12,10 @@ import org.junit.Test;
 public class AppTest 
 {
 	@Test
-    public void testApp() throws IOException
-    {
+	public void testApp() throws IOException
+	{
 		App.main(null);
-        assertTrue( true );
+		assertTrue( true );
 
-    }
+	}
 }

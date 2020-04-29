@@ -29,7 +29,7 @@ public class DataframeTest{
 	protected static Object[][] BadData = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", "11"} };
 	protected static Object[][] BadTypeDataCheckOk = { {"nom","age"}, {"Robert", (Integer) 10}, {"Marc", (Boolean) true} };
 	protected static Object[][] BadTypeDataCheckNotOk = { {"nom","age"}, {"Robert", (Boolean) true}, {"Marc", (Boolean) true} };
-    
+
 	private void goodDataAttributes() {
 		assertEquals(2, d.lines.size());
 		assertEquals(2, d.getColumns().size());
@@ -39,14 +39,14 @@ public class DataframeTest{
 		assertEquals(String.class,d.getColumns().get(0).getType());
 		assertEquals(Integer.class,d.getColumns().get(1).getType());
 	}
-	
-    @Test(expected = None.class)
-    public void testDataframeLoadFromGoodCSV() throws FileNotFoundException {
+
+	@Test(expected = None.class)
+	public void testDataframeLoadFromGoodCSV() throws FileNotFoundException {
 		d = new Dataframe("./annexes/testGoodCSV.csv");
 		goodDataAttributes();
-    }
-    @Test(expected = None.class)
-    public void testDataframeLoadFromGoodDoubleCSV() throws FileNotFoundException {
+	}
+	@Test(expected = None.class)
+	public void testDataframeLoadFromGoodDoubleCSV() throws FileNotFoundException {
 		d = new Dataframe("./annexes/testGoodDoubleCSV.csv");
 		assertEquals(2, d.lines.size());
 		assertEquals(2, d.getColumns().size());
@@ -55,51 +55,51 @@ public class DataframeTest{
 		assertEquals("age",d.getColumns().get(1).label);
 		assertEquals(String.class,d.getColumns().get(0).getType());
 		assertEquals(Double.class,d.getColumns().get(1).getType());
-    }
-    
-    @Test(expected = FileNotFoundException.class)
-    public void testDataframeNoFile() throws FileNotFoundException{
+	}
+
+	@Test(expected = FileNotFoundException.class)
+	public void testDataframeNoFile() throws FileNotFoundException{
 		d = new Dataframe("./annexes/nonExistent.csv");
-    }
-    @Test
-    public void testDataframeEmptyFile() throws FileNotFoundException{
+	}
+	@Test
+	public void testDataframeEmptyFile() throws FileNotFoundException{
 		d = new Dataframe("./annexes/empty.csv");
 		assertEquals(0, d.lines.size());
 		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
-    }
-    
-    @Test
+	}
+
+	@Test
 	public void testDataframeFromGoodData() {
 		d = new Dataframe(GoodData);
 		goodDataAttributes();
 	}
-    
-    @Test
+
+	@Test
 	public void testDataframeFromBadData() {
 		d = new Dataframe(BadData);
 		assertEquals(0, d.lines.size());
 		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
-    
-    @Test
+
+	@Test
 	public void testDataframeFromBadTypeDataCheckOk() {
 		d = new Dataframe(BadTypeDataCheckOk);
 		assertEquals(0, d.lines.size());
 		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
-    
-    @Test
+
+	@Test
 	public void testDataframeFromBadTypeDataCheckNotOk() {
 		d = new Dataframe(BadTypeDataCheckNotOk);
 		assertEquals(0, d.lines.size());
 		assertEquals(0, d.getColumns().size());
 		assertEquals(0, d.labelsToInt.keySet().size());
 	}
-	
-    @Test
+
+	@Test
 	public void testDataframeFromGoodDataDouble() {
 		d = new Dataframe(GoodDataDouble);
 		assertEquals(2, d.lines.size());
@@ -110,20 +110,20 @@ public class DataframeTest{
 		assertEquals(String.class,d.getColumns().get(0).getType());
 		assertEquals(Double.class,d.getColumns().get(1).getType());
 	}
-    /*
+	/*
     @Test
 	public void testNameColumsEqual() {
 		d = new Dataframe(DataWithSameNameColumn);
 		goodDataAttributes();
 	}
-*/
-    @Test
+	 */
+	@Test
 	public void testView() {
 		d = new Dataframe(GoodData);
 		assertNotNull(d.view());
 	}
 
-    @Test
+	@Test
 	public void testFromLines() {
 		d = new Dataframe(GoodData);
 		int[] lines = {0};
@@ -136,9 +136,9 @@ public class DataframeTest{
 		assertEquals("age",d2.getColumns().get(1).label);
 		assertEquals(String.class,d2.getColumns().get(0).getType());
 		assertEquals(Integer.class,d2.getColumns().get(1).getType());
-		
+
 	}
-    @Test
+	@Test
 	public void testFromLinesBad() {
 		d = new Dataframe(GoodData);
 		int[] lines = {0,1,20};
@@ -151,24 +151,24 @@ public class DataframeTest{
 		assertEquals("age",d2.getColumns().get(1).label);
 		assertEquals(String.class,d2.getColumns().get(0).getType());
 		assertEquals(Integer.class,d2.getColumns().get(1).getType());
-		
+
 	}
-    @Test
+	@Test
 	public void testFromColumns() {
-    	d = new Dataframe(GoodData);
+		d = new Dataframe(GoodData);
 		String[] columns = {"nom"};
 		Dataframe d2 = d.fromColumns(columns);
 		assertNotNull(d2);
 		assertEquals(2, d2.lines.size());
-		
+
 		assertEquals(columns.length, d2.lines.get(0).length);
 		assertEquals(1, d2.getColumns().size());
 		assertEquals(1, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
 		assertEquals(String.class,d2.getColumns().get(0).getType());
-		
-    	d = new Dataframe(GoodData3colum);
-    	String[] columnsprime = {"nom","age"};
+
+		d = new Dataframe(GoodData3colum);
+		String[] columnsprime = {"nom","age"};
 		d2 = d.fromColumns(columnsprime);
 		assertNotNull(d2);
 		assertEquals(2, d2.lines.size());
@@ -176,92 +176,92 @@ public class DataframeTest{
 		assertEquals(2, d2.labelsToInt.keySet().size());
 		assertEquals("nom",d2.getColumns().get(0).label);
 		assertEquals(String.class,d2.getColumns().get(0).getType());
-		
+
 	}
-    @Test
+	@Test
 	public void testDataFrameEquals() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = new Dataframe(GoodData);
-    	Dataframe d3 = new Dataframe(GoodDataDouble);
-    	GoodData[0][0] = "NOM";
-    	Dataframe d4 = new Dataframe(GoodData);
-    	assertEquals(d, d);
-    	assertNotEquals(d, null);
-    	assertNotEquals(d, d3);
-    	assertNotEquals(d, d4);
-    	assertEquals(d, d2);
-    	GoodData[0][0] = "nom";
+		d = new Dataframe(GoodData);
+		Dataframe d2 = new Dataframe(GoodData);
+		Dataframe d3 = new Dataframe(GoodDataDouble);
+		GoodData[0][0] = "NOM";
+		Dataframe d4 = new Dataframe(GoodData);
+		assertEquals(d, d);
+		assertNotEquals(d, null);
+		assertNotEquals(d, d3);
+		assertNotEquals(d, d4);
+		assertEquals(d, d2);
+		GoodData[0][0] = "nom";
 	}
-    @Test
+	@Test
 	public void testLine() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = new Dataframe(GoodData);
-    	Dataframe d3 = new Dataframe(GoodDataDouble);
-    	Dataframe d4 = new Dataframe(GoodDataLinePlus);
-    	assertEquals(d.lines.get(0), d.lines.get(0));
-    	assertNotEquals(d.lines.get(0), null);
-    	assertNotEquals(d.lines.get(0), d3.lines.get(0));
-    	assertNotEquals(d.lines.get(0), d4.lines.get(0));
-    	assertEquals(d.lines.get(0), d2.lines.get(0));
+		d = new Dataframe(GoodData);
+		Dataframe d2 = new Dataframe(GoodData);
+		Dataframe d3 = new Dataframe(GoodDataDouble);
+		Dataframe d4 = new Dataframe(GoodDataLinePlus);
+		assertEquals(d.lines.get(0), d.lines.get(0));
+		assertNotEquals(d.lines.get(0), null);
+		assertNotEquals(d.lines.get(0), d3.lines.get(0));
+		assertNotEquals(d.lines.get(0), d4.lines.get(0));
+		assertEquals(d.lines.get(0), d2.lines.get(0));
 	}
-    
-    @Test
-    public void testWhereEasy() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = d.where("nom", "Robert", Comparison.EQUAL);
-    	assertEquals(1, d2.lines.size());
-    	assertEquals(d.getColumns().size(), d2.getColumns().size());
-    	assertNotEquals(d, d2);
-    	assertEquals(d2, d2.where("nom", "Robert", Comparison.EQUAL));
-    }
-    
-    @Test
-    public void testWhereNot() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = d.where("nom", "Robert", Comparison.NOT_EQUAL);
-    	assertEquals(1, d2.lines.size());
-    	assertEquals(d.getColumns().size(), d2.getColumns().size());
-    	assertNotEquals(d, d2);
-    	assertEquals(d2, d2.where("nom", "Robert", Comparison.NOT_EQUAL));
-    }
-    
-    @Test
-    public void testWhereSup() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = d.where("age", 9, Comparison.STRICT_SUP);
-    	assertEquals(d, d2);
-    	assertEquals(d2, d2.where("age", 9, Comparison.STRICT_SUP));
-    }
-    
-    @Test
-    public void testWhereInf() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = d.where("age", 20, Comparison.STRICT_INF);
-    	assertEquals(d, d2);
-    	assertEquals(d2, d2.where("age", 20, Comparison.STRICT_INF));
-    }
-    
-    @Test
-    public void testWhereErrors() {
-    	d = new Dataframe(GoodData);
-    	Dataframe d2 = d.where("age", "20", Comparison.STRICT_INF);
-    	assertNull(d2);
-    	d2 = d.where("nonexistant", "20", Comparison.STRICT_INF);
-    	assertNull(d2);
-    }
-    
-    @Test
-    public void testMath() {
-    	d = new Dataframe(GoodData);
-    	Integer[] value = {10};
-    	String[] labels = {"age"};
-    	assertArrayEquals(value, d.operation(new Min(), labels));
-    	value[0] = 11;
-    	assertArrayEquals(value, d.operation(new Max(), labels));
-    	value[0] = 10;
-    	assertArrayEquals(value, d.operation(new Mean(), labels));
-    	value[0] = 21;
-    	assertArrayEquals(value, d.operation(new Sum(), labels));
-    }
-    
+
+	@Test
+	public void testWhereEasy() {
+		d = new Dataframe(GoodData);
+		Dataframe d2 = d.where("nom", "Robert", Comparison.EQUAL);
+		assertEquals(1, d2.lines.size());
+		assertEquals(d.getColumns().size(), d2.getColumns().size());
+		assertNotEquals(d, d2);
+		assertEquals(d2, d2.where("nom", "Robert", Comparison.EQUAL));
+	}
+
+	@Test
+	public void testWhereNot() {
+		d = new Dataframe(GoodData);
+		Dataframe d2 = d.where("nom", "Robert", Comparison.NOT_EQUAL);
+		assertEquals(1, d2.lines.size());
+		assertEquals(d.getColumns().size(), d2.getColumns().size());
+		assertNotEquals(d, d2);
+		assertEquals(d2, d2.where("nom", "Robert", Comparison.NOT_EQUAL));
+	}
+
+	@Test
+	public void testWhereSup() {
+		d = new Dataframe(GoodData);
+		Dataframe d2 = d.where("age", 9, Comparison.STRICT_SUP);
+		assertEquals(d, d2);
+		assertEquals(d2, d2.where("age", 9, Comparison.STRICT_SUP));
+	}
+
+	@Test
+	public void testWhereInf() {
+		d = new Dataframe(GoodData);
+		Dataframe d2 = d.where("age", 20, Comparison.STRICT_INF);
+		assertEquals(d, d2);
+		assertEquals(d2, d2.where("age", 20, Comparison.STRICT_INF));
+	}
+
+	@Test
+	public void testWhereErrors() {
+		d = new Dataframe(GoodData);
+		Dataframe d2 = d.where("age", "20", Comparison.STRICT_INF);
+		assertNull(d2);
+		d2 = d.where("nonexistant", "20", Comparison.STRICT_INF);
+		assertNull(d2);
+	}
+
+	@Test
+	public void testMath() {
+		d = new Dataframe(GoodData);
+		Integer[] value = {10};
+		String[] labels = {"age"};
+		assertArrayEquals(value, d.operation(new Min(), labels));
+		value[0] = 11;
+		assertArrayEquals(value, d.operation(new Max(), labels));
+		value[0] = 10;
+		assertArrayEquals(value, d.operation(new Mean(), labels));
+		value[0] = 21;
+		assertArrayEquals(value, d.operation(new Sum(), labels));
+	}
+
 }
