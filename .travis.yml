@@ -3,14 +3,16 @@ jdk: oraclejdk11
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - docker login -u monnierm -p ${{ secrets.DOCKERHUB_MDP }}
+  - docker push monnierm/pangolin:latest
 
 sudo: required
 services:
   - docker
 
 script:
-  - docker build --tag pangolin .
-  - docker run pangolin
-
-after_script:
-  - docker images
+  - mvn clean
+  - docker pull monnierm/pangolin:latest
+  - docker build --cache-from=monnierm/pangolin:latest . -t mmonierm/pangolin:latest
+  - docker run monnierm/pangolin:latest
+  - mvn test
