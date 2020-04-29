@@ -3,3 +3,14 @@ jdk: oraclejdk11
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build --tag pangolin .
+  - docker run pangolin
+
+after_script:
+  - docker images
