@@ -13,5 +13,5 @@ services:
 script:
   - mvn clean
   - docker pull monnierm/pangolin:latest
-  - docker build --cache-from=pangolin:latest . -t pangolin:latest
-  - docker run pangolin
+  - docker build --cache-from=monnierm/pangolin:latest . -t mmonierm/pangolin:latest
+  - docker run monnierm/pangolin:latest
