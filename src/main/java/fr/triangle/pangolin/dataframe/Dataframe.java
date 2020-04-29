@@ -64,7 +64,14 @@ public class Dataframe{
 				d.labelsToInt.put(c.label, i++);
 			}
 		}
-		d.lines.addAll(this.lines);
+		d.lines = new ArrayList<Line>(this.lines.size());
+		for (int j = 0; j < this.lines.size(); j++) {
+			Object[] temp = new Object[i];
+			for (int k = 0; k < d.getColumns().size(); k++) {
+				temp[k] = d.getColumns().get(k).getListe().get(j);
+			}
+			d.lines.add(j, new Line(temp));
+		}
 		
 		return d;
 	}
